@@ -106,7 +106,7 @@ if (!$errors) {
 	if(!empty($data["email_sender"])){
 
 		// Email body
-		$email_content = '<p>' . EMAIL_BODY_RECEIVED . '</p>';
+		$email_content = '<p>' . EMAIL_BODY_VIEWED . '</p>';
 		$email_content .= '<p>---</p><p>Thank you,<br />' . SITE_NAME . '</p>';
 
 		if($use_sendgrid){
