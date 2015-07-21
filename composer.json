@@ -1,0 +1,8 @@
+{
+    "require": {
+        "defuse/php-encryption": "~1.2",
+		"jamesmoss/flywheel": "0.4.*",
+		"sendgrid/sendgrid": "~3.2",
+        "andrefelipe/orchestrate-php": "0.14.*"
+    }
+}
