@@ -35,6 +35,8 @@ $(function() {
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 		$("#results").removeClass().empty();
 		$("form").trigger("reset");
+		$(".input-group.date").datepicker("setDate", plus7days);
+		$(".input-group.date").datepicker('update');
 	});
 
 	// Show hidden form fields when checkbox is selected
@@ -59,18 +61,16 @@ $(function() {
 				data: formData,
 				success: function(data) {
 					if (data.errors) {
-						$("#results").removeClass().empty().addClass("alert alert-danger fade in").html("<strong>Hold on there...</strong> " + data.msg);
+						$("#results").removeClass().empty().addClass("alert alert-danger fade in text-center").html("<strong>Hold on there...</strong> " + data.msg);
 					} else {
-						$("form").trigger("reset");
-						$(".input-group.date").datepicker("setDate", plus7days);
-						$(".input-group.date").datepicker('update');
-						$("[id^=show_]").hide();
-						$("#results").removeClass().empty().addClass("alert alert-success fade in").html("<strong>Nice work!</strong> Your message, ID: " + data.msg + " has been created. This ID will not be provided again, so keep it in a safe location!");
+						$(".nav, .tab-content").remove();
+						$("#results").removeClass().empty().addClass("alert alert-success fade in text-center").html("<strong>Message encrypted!</strong>" + vars.SUCCESS_ENCRYPTION);
+						$("#results").after('<div class="panel panel-default"><div class="panel-body text-center">To access your message, use the following link: <p class="lead"><mark>' +  vars.URL + '/?id=' +data.msg + '</mark></p><p class="text-warning"><span class="glyphicon glyphicon-warning-sign"></span> This link will not be provided again, so keep it in a safe location!</p></div></div><button id="clip_button" class="btn btn-success btn-lg btn-block" data-clipboard-text="' + vars.URL + '/?id=' +data.msg + '"><span class="glyphicon glyphicon-copy"></span> Copy message link to clipboard</button>');
 						var client = new ZeroClipboard( $('#clip_button') );	
 					}
 				},
 				error: function(xhr, status, error) {
-					$("#results").removeClass().empty().addClass("alert alert-danger fade in").html('<strong>Hold on there...</strong> An internal error has occured.');
+					$("#results").removeClass().empty().addClass("alert alert-danger fade in text-center").html('<strong>Hold on there...</strong>' + vars.INTERNAL_ERROR);
 				},
 				complete: function() {
 					l.ladda('stop');
@@ -97,17 +97,15 @@ $(function() {
 				data: formData,
 				success: function(data) {
 					if (data.errors) {
-						$("#results").removeClass().empty().addClass("alert alert-danger fade in").html("<strong>Hold on there...</strong> " + data.msg);
+						$("#results").removeClass().empty().addClass("alert alert-danger fade in text-center").html("<strong>Hold on there...</strong> " + data.msg);
 					} else {
-						$("form").trigger("reset");
-						$(".input-group.date").datepicker("setDate", plus7days);
-						$(".input-group.date").datepicker('update');
 						$(".nav, .tab-content").remove();
-						$("#results").removeClass().empty().html("<pre>" + data.msg + "</pre>");
+						$("#results").removeClass().empty().addClass("alert alert-success fade in text-center").html("<strong>Message decrypted!</strong>" + vars.SUCCESS_DECRYPTION);
+						$("#results").after("<pre>" + data.msg + "</pre>");
 					}
 				},
 				error: function(xhr, status, error) {
-					$("#results").removeClass().empty().addClass("alert alert-danger fade in").html('<strong>Hold on there...</strong> An internal error has occured.');
+					$("#results").removeClass().empty().addClass("alert alert-danger fade in text-center").html('<strong>Hold on there...</strong>' + vars.INTERNAL_ERROR);
 				},
 				complete: function() {
 					l.ladda('stop');

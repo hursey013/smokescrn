@@ -49,7 +49,7 @@ if((empty($message))
 	response(VALIDATION_REQUIRED_FIELDS, $errors, $logger);
 }					   
 
-// Validation: check if passwords is long enough
+// Validation: check if textarea is too long
 if(strlen($message) > 2500) {
 	$errors = true;
 	response(VALIDATION_TEXTAREA_LENGTH, $errors, $logger);

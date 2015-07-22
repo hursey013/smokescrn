@@ -73,7 +73,7 @@ require_once 'common.php';
 							<div class="checkbox">
 								<label>
 									<input type="checkbox" name="show_email_recipient">
-									Send the message link to someone <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" title="What's this?" data-content="And here's some amazing content. It's very engaging. Right?">?</a>
+									Send the message link to someone <!--<a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" title="What's this?" data-content="And here's some amazing content. It's very engaging. Right?">--></a>
 								</label>
 							</div>
 
@@ -115,7 +115,7 @@ require_once 'common.php';
 								</div>
 								<span class="help-block with-errors"></span>
 							</div>
-							<button type="submit" class="btn btn-primary btn-lg btn-block ladda-button" data-style="zoom-out" data-size="l"><span class="ladda-label">Encrypt Secret Message</span></button>
+							<button type="submit" class="btn btn-primary btn-lg btn-block ladda-button" data-style="zoom-out" data-size="l"><span class="ladda-label"><span class="glyphicon glyphicon-lock"></span> Encrypt Secret Message</span></button>
 						</form>
 					</div>
 
@@ -123,7 +123,7 @@ require_once 'common.php';
 					<div role="tabpanel" class="tab-pane <?php if($referral){echo 'active';}?>" id="decrypt">
 						<form id="form_decrypt">
 							<div class="form-group">
-								<label for="id">Message ID</label>
+								<label for="id">smokescrn ID</label>
 								<input type="text" class="form-control" id="id" name="id" placeholder="<?php if($use_orchestrate){echo "0b519785ab20dde5";}else{echo "o8AZv0hGh";}?>" required  maxlength="16" value="<?php if($referral){echo $_GET["id"];}?>">
 							</div>
 							<div class="form-group">
@@ -143,6 +143,18 @@ require_once 'common.php';
 			</div>
 
 		</div>
+	
+		<script type="text/javascript">
+			<?php
+			$vars = array(
+				"URL" => SITE_URL,
+				"SUCCESS_ENCRYPTION" => SUCCESS_ENCRYPTION,
+				"SUCCESS_DECRYPTION" => SUCCESS_DECRYPTION,
+				"INTERNAL_ERROR" => INTERNAL_ERROR
+			);
+			?>
+			var vars = <?php echo json_encode($vars);?>;
+		</script>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
