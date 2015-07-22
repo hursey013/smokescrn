@@ -50,7 +50,7 @@ require_once 'common.php';
 							<div class="form-group">
 								<label for="message">Your secret message:</label>
 								<textarea class="form-control" id="message" name="message" rows="3" maxlength="2500" required></textarea>
-								<span class="help-block with-errors"><span id="chars" style="font-weight:bold;">2500</span> characters remaining.  Plain text only.</span>
+								<span class="help-block"><span id="chars" style="font-weight:bold;">2500</span> characters remaining.  Plain text only.</span>
 							</div>
 							<div class="form-group">
 								<label for="encrypt_password">Add a complex password to your message:</label>
