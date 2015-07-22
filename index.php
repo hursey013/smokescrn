@@ -26,7 +26,7 @@ require_once 'common.php';
 			<div class="col-md-6 col-md-offset-3">
 
 				<div class="page-header text-center">
-					<h1><?php echo SITE_NAME; ?></h1>
+					<h1><a class="link-black" href="<?php echo SITE_URL; ?>"><?php echo SITE_NAME; ?></a></h1>
 				</div>
 
 				<div id="results"></div>
