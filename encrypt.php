@@ -50,6 +50,12 @@ if((empty($message))
 }					   
 
 // Validation: check if passwords is long enough
+if(strlen($message) > 2500) {
+	$errors = true;
+	response(VALIDATION_MESSAGE_LENGTH, $errors, $logger);
+}
+
+// Validation: check if passwords is long enough
 if(strlen($password) < 8) {
 	$errors = true;
 	response(VALIDATION_PASSWORD_LENGTH, $errors, $logger);

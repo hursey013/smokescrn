@@ -49,8 +49,8 @@ require_once 'common.php';
 						<form id="form_encrypt">
 							<div class="form-group">
 								<label for="message">Your secret message:</label>
-								<textarea class="form-control" id="message" name="message" rows="3" required></textarea>
-								<span class="help-block with-errors">Plain text only.</span>
+								<textarea class="form-control" id="message" name="message" rows="3" maxlength="2500" required></textarea>
+								<span class="help-block with-errors"><span id="chars" style="font-weight:bold;">2500</span> characters remaining.  Plain text only.</span>
 							</div>
 							<div class="form-group">
 								<label for="encrypt_password">Add a complex password to your message:</label>
@@ -73,7 +73,7 @@ require_once 'common.php';
 							<div class="checkbox">
 								<label>
 									<input type="checkbox" name="show_email_recipient">
-									Send the message link to someone
+									Send the message link to someone <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" title="What's this?" data-content="And here's some amazing content. It's very engaging. Right?">?</a>
 								</label>
 							</div>
 

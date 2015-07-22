@@ -1,6 +1,6 @@
 $(function() {
 	
-	// Bootstrap Datepicker	
+	// Bootstrap datepicker	
 	$('.input-group.date').datepicker({
 		format: 'mm/dd/yyyy',
 		autoclose: true,
@@ -11,6 +11,18 @@ $(function() {
 	plus7days.setDate(plus7days.getDate() + 7 );
 	$(".input-group.date").datepicker("setDate", plus7days);
 	$(".input-group.date").datepicker('update');
+	
+	// Bootstrap popover
+	$(function () {
+	  $('[data-toggle="popover"]').popover();
+	});
+
+	var maxLength = 2500;
+	$('textarea').keyup(function() {
+		var length = $(this).val().length;
+		length = maxLength-length;
+		$('#chars').text(length);
+	});
 	
 	// ZeroClipboard
 	ZeroClipboard.config({
@@ -53,7 +65,7 @@ $(function() {
 						$(".input-group.date").datepicker("setDate", plus7days);
 						$(".input-group.date").datepicker('update');
 						$("[id^=show_]").hide();
-						$("#results").removeClass().empty().addClass("alert alert-success fade in").html("<strong>Nice work!</strong> Your message, <span id='clip_button' data-clipboard-text='" + window.location.href + "?id=" + data.msg +"' title='Copy link to clipboard'><strong>" + data.msg + "</strong> <span class='glyphicon glyphicon-copy'></span></span> has been created. This unique ID will not be provided again, so keep it in a safe location!");
+						$("#results").removeClass().empty().addClass("alert alert-success fade in").html("<strong>Nice work!</strong> Your message, ID: " + data.msg + " has been created. This ID will not be provided again, so keep it in a safe location!");
 						var client = new ZeroClipboard( $('#clip_button') );	
 					}
 				},
