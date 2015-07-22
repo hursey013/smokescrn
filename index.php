@@ -138,7 +138,7 @@ require_once 'common.php';
 				<hr />
 
 				<!--COPYRIGHT-->
-				<p class="small text-center">&copy; <?php echo date('Y'); ?> <a href="index.php"><?php echo SITE_NAME; ?></a>. All rights reserved.</p>
+				<p class="small text-center">&copy; <?php echo date('Y'); ?> <a href="index.php"><?php echo SITE_NAME; ?></a>. All rights reserved. | <a href="https://github.com/hursey013/smokescrn">Github</a></p>
 
 			</div>
 
