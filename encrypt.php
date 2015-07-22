@@ -7,7 +7,7 @@ $errors = false;
 // Validation: check if it's a post request
 if($_SERVER['REQUEST_METHOD'] != "POST") {
 	$errors = true;
-	die('Access Denied.');
+	response(VALIDATION_POST, $errors, $logger);
 }
 
 // Validation: check if it's an ajax request
@@ -15,7 +15,7 @@ if((!isset($_SERVER['HTTP_X_REQUESTED_WITH']))
    AND (strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest')
   ){
 	$errors = true;
-	die('Access Denied.');
+	response(VALIDATION_AJAX, $errors, $logger);
 } 
 
 // Validation: check if any of the fields aren't set
@@ -28,7 +28,7 @@ if((!isset($_POST['message']))
    || (!isset($_POST['expiration_date']))
   ){
 	$errors = true;
-	response(VALIDATION_REQUIRED_FIELDS, $errors);
+	response(VALIDATION_REQUIRED_FIELDS, $errors, $logger);
 } else {
 	$message = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
 	$password = $_POST['encrypt_password'];
@@ -46,19 +46,19 @@ if((empty($message))
    || (empty($expiration_date))
   ){
 	$errors = true;
-	response(VALIDATION_REQUIRED_FIELDS, $errors);
+	response(VALIDATION_REQUIRED_FIELDS, $errors, $logger);
 }					   
 
 // Validation: check if passwords is long enough
 if(strlen($password) < 8) {
 	$errors = true;
-	response(VALIDATION_PASSWORD_LENGTH, $errors);
+	response(VALIDATION_PASSWORD_LENGTH, $errors, $logger);
 }
 
 // Validation: check if passwords match
 if($password !== $password_confirm) {
 	$errors = true;
-	response(VALIDATION_PASSWORD_MISMATCH, $errors);
+	response(VALIDATION_PASSWORD_MISMATCH, $errors, $logger);
 }		
 
 // Validation: check for valid email format
@@ -66,17 +66,15 @@ if((!empty($email_recipient)) && (!filter_var($email_recipient, FILTER_VALIDATE_
    || (!empty($email_sender)) && (!filter_var($email_sender, FILTER_VALIDATE_EMAIL))
   ){
 	$errors = true;
-	response(VALIDATION_EMAIL_INVALID, $errors);
+	response(VALIDATION_EMAIL_INVALID, $errors, $logger);
 }
 
 // Validation: check for valid expiration date format
-if(!empty($expiration_date)) {
-	$date = DateTime::createFromFormat('m/d/Y', $expiration_date);
-	$date_errors = DateTime::getLastErrors();
-	if ($date_errors['warning_count'] + $date_errors['error_count'] > 0) {
-		$errors = true;
-		response(VALIDATION_DATE_INVALID, $errors);
-	}
+$date = DateTime::createFromFormat('m/d/Y', $expiration_date);
+$date_errors = DateTime::getLastErrors();
+if ($date_errors['warning_count'] + $date_errors['error_count'] > 0) {
+	$errors = true;
+	response(VALIDATION_DATE_INVALID, $errors, $logger);
 }
    
 // If all of the above validation checks pass, continue on
@@ -98,9 +96,9 @@ if (!$errors) {
 	try {
 		$data_encrypted = Crypto::Encrypt($data, $key);
 	} catch (CryptoTestFailedException $ex) {
-		response(ENCRYPTION_UNSAFE, true);
+		response(ENCRYPTION_UNSAFE, true, $logger);
 	} catch (CannotPerformOperationException $ex) {
-		response(DECRYPTION_UNSAFE, true);
+		response(DECRYPTION_UNSAFE, true, $logger);
 	}		
 
 	// Store the encrypted data
@@ -114,11 +112,13 @@ if (!$errors) {
 		// Check if Orchestrate is enabled
 		$item = $client->post(ORCHESTRATE_COLLECTION, $array);
 		$id = $item->getKey();
+		$logger->info(LOG_ORCHESTRATE_POST);
 	} else {
 		// Fallback to Flywheel
 		$item = new \JamesMoss\Flywheel\Document($array);
 		$repo->store($item);
 		$id = $item->getId();
+		$logger->info(LOG_FLYWHEEL_POST);
 	}
 
 	// Send email to recipient
@@ -143,10 +143,11 @@ if (!$errors) {
 			// Check for email errors and provide a response
 			try {
 				$sendgrid->send($sendemail);
+				$logger->info(LOG_MESSAGE_CREATED . ' ' . LOG_EMAIL_SENDGRID);
 				response($id, false);
 			} catch(\SendGrid\Exception $e) {
 				foreach($e->getErrors() as $er) {
-					response($er, true);
+					response($er, true, $logger);
 				}
 			}
 			
@@ -157,18 +158,22 @@ if (!$errors) {
 			
 			// Check for email errors and provide a response
 			if($email){
+				$logger->info(LOG_MESSAGE_CREATED . ' ' . LOG_EMAIL_PHP);
 				response($id, false);
 			} else {
-				response(EMAIL_ERROR, true);		
+				response(EMAIL_ERROR, true, $logger);		
 			}
 			
 		}
 
 	} else {
 		// Provide response
+		$logger->info(LOG_MESSAGE_CREATED);
 		response($id, false);
 	}
 
 } else {
-	die('Access Denied.');
+	// Unknown error
+	$logger->alert(LOG_UNKNOWN_ERROR);
+	die();
 }
