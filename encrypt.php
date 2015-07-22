@@ -132,7 +132,7 @@ if (!$errors) {
 
 		// Email body
 		$email_content = '<p>' . EMAIL_BODY_SENT . '</p>';
-		$email_content .= '<p>Access it at: ' . SITE_URL . '/?id=' . $id . '</p>';
+		$email_content .= '<p>Access it at: <a href="' . SITE_URL . '/?id=' . $id . '" target="_blank">' . SITE_URL . '/?id=' . $id . '</a></p>';
 		if(!empty($email_password_hint)){
 			$email_content .= '<p><strong>Password hint: </strong>' . $email_password_hint;
 		}
