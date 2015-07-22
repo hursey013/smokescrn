@@ -1,5 +1,5 @@
 $(function() {
-
+	
 	// Bootstrap Datepicker	
 	$('.input-group.date').datepicker({
 		format: 'mm/dd/yyyy',
@@ -25,23 +25,20 @@ $(function() {
 		$("form").trigger("reset");
 	});
 
+	// Show hidden form fields when checkbox is selected
 	$('input[type="checkbox"]').click(function(){
 		var item = $(this).attr('name');
 		$('#'+item).toggle();
 	});
-	
-	$(document).ajaxSend(function(event, request, settings) {
-	  $('#loading-indicator').show();
-	});
-
-	$(document).ajaxComplete(function(event, request, settings) {
-	  $('#loading-indicator').hide();
-	});	
 
 	// Connect to encrypt.php and return response
 	$('#form_encrypt').validator().on('submit', function(e) {
-		$("html, body").animate({ scrollTop: 0 }, "slow");
 		if (!e.isDefaultPrevented()) {
+
+			// Initiate Ladda loading animation
+			var l = $("button", this).ladda();
+			l.ladda('start');
+			
 			var formData = $(this).serialize();
 			$.ajax({
 				type: "POST",
@@ -62,6 +59,10 @@ $(function() {
 				},
 				error: function(xhr, status, error) {
 					$("#results").removeClass().empty().addClass("alert alert-danger fade in").html('<strong>Hold on there...</strong> An internal error has occured.');
+				},
+				complete: function() {
+					l.ladda('stop');
+					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			});
 			e.preventDefault();
@@ -70,8 +71,12 @@ $(function() {
 
 	// Connect to decrypt.php and return response
 	$('#form_decrypt').validator().on('submit', function(e) {
-		$("html, body").animate({ scrollTop: 0 }, "slow");
 		if (!e.isDefaultPrevented()) {
+			
+			// Initiate Ladda loading animation
+			var l = $("button", this).ladda();
+			l.ladda('start');			
+			
 			var formData = $(this).serialize();
 			$.ajax({
 				type: "POST",
@@ -91,6 +96,10 @@ $(function() {
 				},
 				error: function(xhr, status, error) {
 					$("#results").removeClass().empty().addClass("alert alert-danger fade in").html('<strong>Hold on there...</strong> An internal error has occured.');
+				},
+				complete: function() {
+					l.ladda('stop');
+					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			});
 			e.preventDefault();
