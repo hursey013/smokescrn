@@ -123,7 +123,7 @@ require_once 'common.php';
 					<div role="tabpanel" class="tab-pane <?php if($referral){echo 'active';}?>" id="decrypt">
 						<form id="form_decrypt">
 							<div class="form-group">
-								<label for="id">smokescrn ID</label>
+								<label for="id">Message ID</label>
 								<input type="text" class="form-control" id="id" name="id" placeholder="<?php if($use_orchestrate){echo "0b519785ab20dde5";}else{echo "o8AZv0hGh";}?>" required  maxlength="16" value="<?php if($referral){echo $_GET["id"];}?>">
 							</div>
 							<div class="form-group">
