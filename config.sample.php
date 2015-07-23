@@ -4,6 +4,10 @@ define("SITE_NAME", "SuperSecret");
 define("SITE_URL", "http://secretwebsite.com"); // No trailing slash
 define("PASSWORD_PEPPER", "INSERT YOUR PEPPER");
 
+// JWT Anti-CSRF settings
+define('JWT_SECRET', "This is the secret key for the JWT HMAC authentication mechanism.");
+define('JWT_TIMEOUT', 60);
+
 // Email Settings
 define("EMAIL_SUBJECT_SENT", "New " . SITE_NAME . " message");
 define("EMAIL_SUBJECT_VIEWED", SITE_NAME . " message viewed");
@@ -21,6 +25,7 @@ define("FLYWHEEL_REPO_DIR", "secrets");
 // User Notifications
 define("VALIDATION_POST", "Form data not received as a POST request.");
 define("VALIDATION_AJAX", "Form data not received as an AJAX request.");
+define("VALIDATION_CSRF", "Request failed to meet anti-CSRF requirements.");
 define("VALIDATION_REQUIRED_FIELDS", "All fields are required.");
 define("VALIDATION_TEXTAREA_LENGTH", "Your message is too long.");
 define("VALIDATION_PASSWORD_LENGTH", "Your password is not long enough.");

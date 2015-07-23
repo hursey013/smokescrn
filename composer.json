@@ -4,6 +4,7 @@
 		"jamesmoss/flywheel": "0.4.*",
 		"sendgrid/sendgrid": "~3.2",
         "andrefelipe/orchestrate-php": "0.14.*",
-        "katzgrau/klogger": "dev-master"
+        "katzgrau/klogger": "dev-master",
+        "firebase/php-jwt": "^3.0"
     }
 }

@@ -53,6 +53,16 @@ $(function() {
 			var l = $("button", this).ladda();
 			l.ladda('start');
 			
+			// TODO: factor this anti-csrf code out so it isn't copy/pasted in the other submit handler below
+			// grab anti-csrf token:
+			var csrfToken = $.ajax({
+				type: "GET",
+				url: "token.php",
+				async: false
+			}).responseText;
+			
+			$('#csrfToken').val(csrfToken);
+			
 			var formData = $(this).serialize();
 			$.ajax({
 				type: "POST",
@@ -88,6 +98,15 @@ $(function() {
 			// Initiate Ladda loading animation
 			var l = $("button", this).ladda();
 			l.ladda('start');			
+			
+			// grab anti-csrf token:
+			var csrfToken = $.ajax({
+				type: "GET",
+				url: "token.php",
+				async: false
+			}).responseText;
+			
+			$('#csrfToken').val(csrfToken);
 			
 			var formData = $(this).serialize();
 			$.ajax({
