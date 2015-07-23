@@ -3,6 +3,9 @@ require_once 'vendor/autoload.php';
 require_once 'config.php';
 use andrefelipe\Orchestrate\Client;
 
+// sessions and shiznit (used with the anti-csrf stuff)
+session_start();
+
 // Determine if a message is being accessed from link
 $referral = (isset($_GET["id"]) && (!empty($_GET["id"])));
 

@@ -1,5 +1,6 @@
 <?php
 require_once 'common.php';
+use Firebase\JWT\JWT;
 
 // Initial validation state
 $errors = false;
@@ -17,6 +18,50 @@ if((!isset($_SERVER['HTTP_X_REQUESTED_WITH']))
 	$errors = true;
 	response(VALIDATION_AJAX, $errors, $logger);
 } 
+
+// TODO: factor this anti-csrf code out to use in encrypt.php and decrypt.php wihout copy/paste. For the time being it probably doesn't matter if decrypt.php doesn't check for csrf stuff becuase you have to know the correct encryption key anyway to successfully decrypt a message. The only real motivation to put it in would be to mitigate brute force attacks because that would necessitate the attacker doubling the amount of requests to the server to get a token each time a decyrption request is made.
+if(!isset($_POST['csrfToken']))
+{
+	$errors = true;
+	$logger->info('Anti-CSRF token is not present in the request.');
+	response(VALIDATION_CSRF, $errors, $logger);
+}
+else
+{
+	try
+	{
+		$token = JWT::decode($_POST['csrfToken'], JWT_SECRET, array('HS512'));
+		
+		if(isset($token->nonce) && isset($token->TTL))
+		{
+			if($token->nonce != $_SESSION['jwt_nonce'])
+			{
+				$errors = true;
+				$logger->info('NONCE mismatch! Tomfoolery has occured!');
+				response(VALIDATION_CSRF, $errors, $logger);
+			}
+			
+			if($token->TTL < time())
+			{
+				$errors = true;
+				$logger->info('ttl exceeded');
+				response(VALIDATION_CSRF, $errors, $logger);
+			}
+		}
+		else
+		{
+			$errors = true;
+			$logger->info('token did not have nonce and ttl');
+			response(VALIDATION_CSRF, $errors, $logger);
+		}
+	}
+	catch(Exception $e)
+	{
+		$errors = true;
+		$logger->info('Error decoding JWT: ' . json_encode($e));
+		response(VALIDATION_CSRF, $errors, $logger);
+	}
+}
 
 // Validation: check if any of the fields aren't set
 if((!isset($_POST['message']))

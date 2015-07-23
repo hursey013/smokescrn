@@ -1,6 +1,8 @@
 <?php
 require_once 'common.php';
 
+// TODO: add some sort of rate limiting in here to mitigate brute force cracking attacks
+
 // Initial validation state
 $errors = false;
 
