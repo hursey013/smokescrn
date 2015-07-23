@@ -6,7 +6,7 @@ $logger->debug('Cron job initiated.');
 // Delete expired messages
 if($use_orchestrate){
 	// Check if Orchestrate is enabled
-	$items = $client->search(ORCHESTRATE_COLLECTION, 'expiration_date:[' . time() . ' TO *]');
+	$items = $client->search(ORCHESTRATE_COLLECTION, 'expiration_date:[* TO ' . time() .']');
 	$array =  (array) $items->getResults();
 	foreach ($items as $item) {
 		$client->purge(ORCHESTRATE_COLLECTION, $item->getKey());
