@@ -88,7 +88,7 @@ if (!$errors) {
 
 	// Create encryption key
 	$length = 16;
-	$iterations = 10000;
+	$iterations = 100000;
 	$salt = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
 	$key = hash_pbkdf2("sha256", $password, $salt . PASSWORD_PEPPER, $iterations, $length);
 
