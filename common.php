@@ -13,11 +13,7 @@ if (DEBUG_MODE == true){
 $referral = (isset($_GET["id"]) && (!empty($_GET["id"])));
 
 // Configure logging
-$ip_address = get_client_ip();
-$logFormat = "[{date}] [$ip_address] [{level}] {message}";
-$logger = new Katzgrau\KLogger\Logger(LOGGING_BASE_DIR, Psr\Log\LogLevel::DEBUG, array (
-    'logFormat' => $logFormat
-));
+$logger = new Katzgrau\KLogger\Logger(LOGGING_BASE_DIR, Psr\Log\LogLevel::DEBUG);
 
 // Configure data store
 if(defined('ORCHESTRATE_API_KEY')){
@@ -57,24 +53,4 @@ function response($msg, $errors, $logger = null){
 	);
 	header('Content-type: application/json');
 	die(json_encode($response_array));
-}
-
-// Function to get the client IP address
-function get_client_ip() {
-    $ipaddress = '';
-    if (getenv('HTTP_CLIENT_IP'))
-        $ipaddress = getenv('HTTP_CLIENT_IP');
-    else if(getenv('HTTP_X_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-    else if(getenv('HTTP_X_FORWARDED'))
-        $ipaddress = getenv('HTTP_X_FORWARDED');
-    else if(getenv('HTTP_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_FORWARDED_FOR');
-    else if(getenv('HTTP_FORWARDED'))
-       $ipaddress = getenv('HTTP_FORWARDED');
-    else if(getenv('REMOTE_ADDR'))
-        $ipaddress = getenv('REMOTE_ADDR');
-    else
-        $ipaddress = 'UNKNOWN';
-    return $ipaddress;
 }

@@ -5,7 +5,7 @@ $(function() {
 		format: 'mm/dd/yyyy',
 		autoclose: true,
 		startDate: '+1d',
-		endDate: '+1m'
+		endDate: '+30d'
 	});
 	
 	var plus7days = new Date();

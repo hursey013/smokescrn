@@ -38,12 +38,12 @@ require_once 'common.php';
 					<div role="tabpanel" class="tab-pane <?php if(!$referral){echo 'active';}?>" id="encrypt">
 						<form id="form_encrypt">
 							<div class="form-group">
-								<label for="message">Your secret message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Messages are stored using AES-128 encryption and are permanently deleted once viewed."></a></label>
+								<label for="message">Your secret message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Messages are securely transferred, stored using AES-128 encryption, and permanently deleted once viewed."></a></label>
 								<textarea class="form-control" id="message" name="message" rows="3" maxlength="2500" required></textarea>
 								<span class="help-block"><span id="chars" style="font-weight:bold;">2500</span> characters remaining.  Plain text only.</span>
 							</div>
 							<div class="form-group">
-								<label for="encrypt_password">Add a password to your message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your password is never stored on our server, so if you forget it, your meassage will be unretrievable!"></a></label>
+								<label for="encrypt_password">Add a password to your message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your password is never stored on our server, so if you forget it...your meassage will be unretrievable!"></a></label>
 								<div class="form-inline row">
 									<div class="form-group col-sm-6">
 										<input type="password" class="form-control" id="encrypt_password" name="encrypt_password" placeholder="Password" required data-minlength="8">
@@ -83,7 +83,7 @@ require_once 'common.php';
 						<div class="checkbox">
 							<label>
 								<input type="checkbox" name="show_email_sender">
-								Get notified when the message is viewed <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your email address will be encrypted along with the message and will never be visible to anyone else."></a>
+								Get notified when the message is viewed <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your email address will be encrypted along with your message and will never be visible to anyone else."></a>
 							</label>
 						</div>								
 
@@ -95,7 +95,7 @@ require_once 'common.php';
 						<div class="checkbox">
 							<label>
 								<input type="checkbox" name="show_expiration_date">
-								Change the automatic expiration date <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="By default, messages that have not been viewed are permanently deleted after 7 days."></a>
+								Change the automatic expiration date <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="By default, messages that have not been viewed are permanently deleted after 7 days (30 days max)."></a>
 							</label>
 						</div>								
 

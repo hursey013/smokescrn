@@ -10,7 +10,7 @@ if($use_orchestrate){
 	$array =  (array) $items->getResults();
 	foreach ($items as $item) {
 		$client->purge(ORCHESTRATE_COLLECTION, $item->getKey());
-		$logger->info('Message ID: ' . $item->getKey() . ' has expired and was deleted.');
+		$logger->info('Message ID: ' . $item->getKey() . ', expired and was deleted.');
 	}	
 } else {
 	// Fallback to Flywheel
@@ -20,7 +20,7 @@ if($use_orchestrate){
 	$array =  (array) $items;
 	foreach($items as $item) {
 		$repo->delete($item);
-		$logger->info('Message ID: ' . $item->getID() . ' has expired and was deleted.');
+		$logger->info('Message ID: ' . $item->getID() . ', expired and was deleted.');
 	}
 }
 

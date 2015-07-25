@@ -58,7 +58,7 @@ if($use_orchestrate){
 		$data_encrypted = base64_decode($item->secret);
 	} else {
 		$errors = true;
-		$logger->error($item->getStatus());
+		$logger->error('Message ID: ' . $id . ', ' . $item->getStatus());
 		response(VALIDATION_MESSAGE_NOTFOUND, $errors, $logger);
 	}
 } else {
@@ -95,11 +95,11 @@ if (!$errors) {
 	if($use_orchestrate){
 		// Check if Orchestrate is enabled
 		$item = $client->purge(ORCHESTRATE_COLLECTION, $id);
-		$logger->info(LOG_ORCHESTRATE_PURGE);
+		$logger->info('Message ID: ' . $id . ', ' . LOG_ORCHESTRATE_PURGE);
 	} else {
 		// Fallback to Flywheel
 		$repo->delete($id);
-		$logger->info(LOG_FLYWHEEL_PURGE);
+		$logger->info('Message ID: ' . $id . ', ' . LOG_FLYWHEEL_PURGE);
 	}
 
 	$data = unserialize($data_decrypted);
@@ -120,20 +120,20 @@ if (!$errors) {
 				->setHtml($email_content);
 
 			$sendgrid->send($sendemail);
-			$logger->info(LOG_MESSAGE_VIEWED . ' ' . LOG_EMAIL_SENDGRID);
+			$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_SENDGRID);
 			
 		} else {	
 			
 			// Fallback to PHP Mail
 			mail($data["email_sender"], EMAIL_SUBJECT_VIEWED, $email_content, $email_headers);
-			$logger->info(LOG_MESSAGE_VIEWED . ' ' . LOG_EMAIL_PHP);
+			$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_PHP);
 			
 		}
 
 	}	
 		
 	// Provide response
-	$logger->info(LOG_MESSAGE_VIEWED);
+	$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_NONE);
 	response($data["message"], false);
 
 } else {

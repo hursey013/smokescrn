@@ -82,7 +82,7 @@ if ($date_errors['warning_count'] + $date_errors['error_count'] > 0) {
 	$errors = true;
 	response(VALIDATION_DATE_INVALID, $errors, $logger);
 }
-if (strtotime($expiration_date) > strtotime("today +1 month")){
+if (strtotime($expiration_date) > strtotime("today +30 days")){
 	$errors = true;
 	response(VALIDATION_DATE_INVALID, $errors, $logger);
 }
@@ -122,13 +122,13 @@ if (!$errors) {
 		// Check if Orchestrate is enabled
 		$item = $client->post(ORCHESTRATE_COLLECTION, $array);
 		$id = $item->getKey();
-		$logger->info(LOG_ORCHESTRATE_POST);
+		$logger->info('Message ID: ' . $id . ', ' . LOG_ORCHESTRATE_POST . ' Expiration date: ' . $expiration_date);
 	} else {
 		// Fallback to Flywheel
 		$item = new \JamesMoss\Flywheel\Document($array);
 		$repo->store($item);
 		$id = $item->getId();
-		$logger->info(LOG_FLYWHEEL_POST);
+		$logger->info('Message ID: ' . $id . ', ' . LOG_FLYWHEEL_POST . ' Expiration date: ' . $expiration_date);
 	}
 
 	// Send email to recipient
@@ -153,7 +153,7 @@ if (!$errors) {
 			// Check for email errors and provide a response
 			try {
 				$sendgrid->send($sendemail);
-				$logger->info(LOG_MESSAGE_CREATED . ' ' . LOG_EMAIL_SENDGRID);
+				$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_SENDGRID);
 				response($id, false);
 			} catch(\SendGrid\Exception $e) {
 				foreach($e->getErrors() as $er) {
@@ -168,7 +168,7 @@ if (!$errors) {
 			
 			// Check for email errors and provide a response
 			if($email){
-				$logger->info(LOG_MESSAGE_CREATED . ' ' . LOG_EMAIL_PHP);
+				$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_PHP);
 				response($id, false);
 			} else {
 				response(EMAIL_ERROR, true, $logger);		
@@ -178,7 +178,7 @@ if (!$errors) {
 
 	} else {
 		// Provide response
-		$logger->info(LOG_MESSAGE_CREATED);
+		$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_NONE);
 		response($id, false);
 	}
 
