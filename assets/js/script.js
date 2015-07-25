@@ -4,7 +4,8 @@ $(function() {
 	$('.input-group.date').datepicker({
 		format: 'mm/dd/yyyy',
 		autoclose: true,
-		startDate: '+1d'
+		startDate: '+1d',
+		endDate: '+1m'
 	});
 	
 	var plus7days = new Date();

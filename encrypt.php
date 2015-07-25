@@ -82,7 +82,11 @@ if ($date_errors['warning_count'] + $date_errors['error_count'] > 0) {
 	$errors = true;
 	response(VALIDATION_DATE_INVALID, $errors, $logger);
 }
-   
+if (strtotime($expiration_date) > strtotime("today +1 month")){
+	$errors = true;
+	response(VALIDATION_DATE_INVALID, $errors, $logger);
+}
+
 // If all of the above validation checks pass, continue on
 if (!$errors) {
 

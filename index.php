@@ -43,7 +43,7 @@ require_once 'common.php';
 								<span class="help-block"><span id="chars" style="font-weight:bold;">2500</span> characters remaining.  Plain text only.</span>
 							</div>
 							<div class="form-group">
-								<label for="encrypt_password">Add a password to your message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="As always, use a strong password that's not easily guessed."></a></label>
+								<label for="encrypt_password">Add a password to your message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your password is never stored on our server, so if you forget it, your meassage will be unretrievable!"></a></label>
 								<div class="form-inline row">
 									<div class="form-group col-sm-6">
 										<input type="password" class="form-control" id="encrypt_password" name="encrypt_password" placeholder="Password" required data-minlength="8">
@@ -63,7 +63,7 @@ require_once 'common.php';
 							<div class="checkbox">
 								<label>
 									<input type="checkbox" name="show_email_recipient">
-									Send the message link to someone <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="If you choose not to send an email, you will need to provide the link to the recipient some other way."></a>
+									Send the message link to someone <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="If you choose not to send an email, you will need to provide the link to the recipient in some other way."></a>
 								</label>
 							</div>
 
@@ -83,7 +83,7 @@ require_once 'common.php';
 						<div class="checkbox">
 							<label>
 								<input type="checkbox" name="show_email_sender">
-								Get notified when the message is viewed <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your email address will be encrypted and will not ever be visible to anyone else."></a>
+								Get notified when the message is viewed <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your email address will be encrypted along with the message and will never be visible to anyone else."></a>
 							</label>
 						</div>								
 
