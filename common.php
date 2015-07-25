@@ -3,6 +3,12 @@ require_once 'vendor/autoload.php';
 require_once 'config.php';
 use andrefelipe\Orchestrate\Client;
 
+// PHP debugging
+if (DEBUG_MODE == true){
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+}
+
 // Determine if a message is being accessed from link
 $referral = (isset($_GET["id"]) && (!empty($_GET["id"])));
 

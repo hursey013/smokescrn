@@ -30,14 +30,6 @@ $(function() {
 		forceHandCursor: true,
 		trustedDomains: [window.location.host, "cdnjs.cloudflare.com"]
 	});	
-	
-	// Clear form and alert messages when switching tabs
-	$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-		$("#results").removeClass().empty();
-		$("form").trigger("reset");
-		$(".input-group.date").datepicker("setDate", plus7days);
-		$(".input-group.date").datepicker('update');
-	});
 
 	// Show hidden form fields when checkbox is selected
 	$('input[type="checkbox"]').click(function(){
@@ -63,7 +55,7 @@ $(function() {
 					if (data.errors) {
 						$("#results").removeClass().empty().addClass("alert alert-danger fade in text-center").html("<strong>Hold on there...</strong> " + data.msg);
 					} else {
-						$(".nav, .tab-content").remove();
+						$(".tab-content").remove();
 						$("#results").removeClass().empty().addClass("alert alert-success fade in text-center").html("<strong>Message encrypted!</strong> " + vars.SUCCESS_ENCRYPTION);
 						$("#results").after('<div class="panel panel-default"><div class="panel-body text-center">To access your message, use the following link: <p class="lead"><mark><a class="link-black" href="' +  vars.URL + '/?id=' +data.msg + '" target="_blank">' +  vars.URL + '/?id=' +data.msg + '</a></mark></p><p class="text-warning"><span class="glyphicon glyphicon-warning-sign"></span> This link will not be provided again, so keep it in a safe location!</p></div></div><button id="clip_button" class="btn btn-success btn-lg btn-block" data-clipboard-text="' + vars.URL + '/?id=' +data.msg + '"><span class="glyphicon glyphicon-copy"></span> Copy message link to clipboard</button>');
 						var client = new ZeroClipboard( $('#clip_button') );	
@@ -99,7 +91,7 @@ $(function() {
 					if (data.errors) {
 						$("#results").removeClass().empty().addClass("alert alert-danger fade in text-center").html("<strong>Hold on there...</strong> " + data.msg);
 					} else {
-						$(".nav, .tab-content").remove();
+						$(".tab-content").remove();
 						$("#results").removeClass().empty().addClass("alert alert-success fade in text-center").html("<strong>Message decrypted!</strong> " + vars.SUCCESS_DECRYPTION);
 						$("#results").after("<pre>" + data.msg + "</pre>");
 					}

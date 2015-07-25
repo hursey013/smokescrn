@@ -32,29 +32,18 @@ require_once 'common.php';
 
 				<div id="results"></div>
 
-				<!--LINKS-->
-				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="<?php if(!$referral){echo 'active';}?>">
-						<a href="#encrypt" aria-controls="encrypt" role="tab" data-toggle="tab">Encrypt</a>
-					</li>
-					<li role="presentation" class="<?php if($referral){echo 'active';}?>">
-						<a href="#decrypt" aria-controls="decrypt" role="tab" data-toggle="tab">Decrypt</a>
-					</li>
-				</ul>
-
-				<!--TABS-->
 				<div class="tab-content">
 
 					<!--ENCRYPT-->
 					<div role="tabpanel" class="tab-pane <?php if(!$referral){echo 'active';}?>" id="encrypt">
 						<form id="form_encrypt">
 							<div class="form-group">
-								<label for="message">Your secret message <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Messages are stored using AES-128 encryption and are permanently deleted once they are viewed."></a></label>
+								<label for="message">Your secret message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Messages are stored using AES-128 encryption and are permanently deleted once viewed."></a></label>
 								<textarea class="form-control" id="message" name="message" rows="3" maxlength="2500" required></textarea>
 								<span class="help-block"><span id="chars" style="font-weight:bold;">2500</span> characters remaining.  Plain text only.</span>
 							</div>
 							<div class="form-group">
-								<label for="encrypt_password">Add a complex password to your message  <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="This is the key to unencrypting your message, so make sure you use a strong password!"></a></label>
+								<label for="encrypt_password">Add a password to your message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="As always, use a strong password that's not easily guessed."></a></label>
 								<div class="form-inline row">
 									<div class="form-group col-sm-6">
 										<input type="password" class="form-control" id="encrypt_password" name="encrypt_password" placeholder="Password" required data-minlength="8">
@@ -74,14 +63,14 @@ require_once 'common.php';
 							<div class="checkbox">
 								<label>
 									<input type="checkbox" name="show_email_recipient">
-									Send the message link to someone <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="If you don't choose to send an email, you will need to provide the link to the recipient some other way."></a>
+									Send the message link to someone <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="If you choose not to send an email, you will need to provide the link to the recipient some other way."></a>
 								</label>
 							</div>
 
 						<div class="form-group" id="show_email_recipient" style="display:none;">
 							<div class="form-inline row">
 								<div class="form-group col-sm-6">
-									<input type="email" class="form-control" id="email_recipient" name="email_recipient" placeholder="recipient@example.com">
+									<input type="email" class="form-control" id="email_recipient" name="email_recipient" placeholder="recipient@some.com">
 									<span class="help-block with-errors"></span>
 								</div>
 								<div class="form-group col-sm-6">
@@ -94,12 +83,12 @@ require_once 'common.php';
 						<div class="checkbox">
 							<label>
 								<input type="checkbox" name="show_email_sender">
-								Get notified when the message is viewed <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your email address will be stored using AES-128 encryption and will not be visible to anyone else."></a>
+								Get notified when the message is viewed <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your email address will be encrypted and will not ever be visible to anyone else."></a>
 							</label>
 						</div>								
 
 						<div class="form-group" id="show_email_sender" style="display:none;">
-							<input type="email" class="form-control" id="email_sender" name="email_sender" placeholder="myemail@example.com">
+							<input type="email" class="form-control" id="email_sender" name="email_sender" placeholder="myemail@some.com">
 							<span class="help-block with-errors"></span>
 						</div>
 
