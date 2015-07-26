@@ -50,7 +50,7 @@ if((empty($message))
 }					   
 
 // Validation: check if textarea is too long
-if(strlen($message) > 2500) {
+if(strlen($message) > 1000) {
 	$errors = true;
 	response(VALIDATION_TEXTAREA_LENGTH, $errors, $logger);
 }
@@ -73,6 +73,12 @@ if((!empty($email_recipient)) && (!filter_var($email_recipient, FILTER_VALIDATE_
   ){
 	$errors = true;
 	response(VALIDATION_EMAIL_INVALID, $errors, $logger);
+}
+
+// Validation: check if password hint is too long
+if(strlen($email_password_hint) > 200) {
+	$errors = true;
+	response(VALIDATION_PASSWORD_HINT_LENGTH, $errors, $logger);
 }
 
 // Validation: check for valid expiration date format

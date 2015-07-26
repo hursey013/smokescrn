@@ -7,7 +7,6 @@ $(function() {
 		startDate: '+1d',
 		endDate: '+30d'
 	});
-	
 	var plus7days = new Date();
 	plus7days.setDate(plus7days.getDate() + 7 );
 	$(".input-group.date").datepicker("setDate", plus7days);
@@ -18,7 +17,8 @@ $(function() {
 	  $('[data-toggle="popover"]').popover();
 	});
 
-	var maxLength = 500;
+	// Message character counter
+	var maxLength = 1000;
 	$('textarea').keyup(function() {
 		var length = $(this).val().length;
 		length = maxLength-length;

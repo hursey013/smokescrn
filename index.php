@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>
-		<?php echo SITE_NAME; ?>
+		<?php echo SITE_NAME; ?> :: <?php echo SITE_TAGLINE; ?>
 	</title>
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col-md-8">
 						<h1 id="logo"><a class="link-black" href="<?php echo SITE_URL; ?>"><span style="font-weight:300;">Smoke</span><span style="font-weight:100;">SCRN</span></a></h1>
-						<h4 id="tagline" style="font-weight:300;">Self-destructing encrypted messages</h4>
+						<h4 id="tagline" style="font-weight:300;"><?php echo SITE_TAGLINE; ?></h4>
 					</div>
 				</div>
 
@@ -46,8 +46,8 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<textarea class="form-control" id="message" name="message" rows="3" maxlength="500" required></textarea>
-										<span class="help-block"><span id="chars" style="font-weight:bold;">500</span> characters remaining.</span>
+										<textarea class="form-control" id="message" name="message" rows="3" maxlength="1000" required></textarea>
+										<span class="help-block"><span id="chars" style="font-weight:bold;">1000</span> characters remaining.</span>
 									</div>
 								</div>
 							</div>
@@ -84,7 +84,7 @@
 										<span class="help-block with-errors"></span>
 									</div>
 									<div class="form-group col-sm-6">
-										<input type="text" class="form-control" id="email_password_hint" name="email_password_hint" placeholder="Password hint (optional)">
+										<input type="text" class="form-control" id="email_password_hint" name="email_password_hint" placeholder="Password hint (optional)" maxlength="200">
 										<span class="help-block with-errors"></span>
 									</div>
 								</div>
@@ -140,12 +140,7 @@
 				<hr />
 
 				<!--COPYRIGHT-->
-				<p class="small text-center">&copy;
-					<?php echo date('Y'); ?>
-					<a href="index.php">
-						<?php echo SITE_NAME; ?>
-					</a>. All rights reserved. | <a href="https://github.com/hursey013/smokescrn">Github</a>
-				</p>
+				<p class="small text-center">&copy; <?php echo date('Y'); ?><a href="index.php"><?php echo SITE_NAME; ?></a>. All rights reserved. | <a href="https://github.com/hursey013/smokescrn">Github</a></p>
 
 			</div>
 		</div>
