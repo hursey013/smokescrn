@@ -77,7 +77,7 @@ if (!$errors) {
 
 	// Create decryption key
 	$length = 16;
-	$iterations = 10000;
+	$iterations = 100000;
 	$key = hash_pbkdf2("sha256", $password, $salt . PASSWORD_PEPPER, $iterations, $length);	
 
 	// Decrypt data, reference: https://github.com/defuse/php-encryption/

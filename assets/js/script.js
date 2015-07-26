@@ -93,8 +93,8 @@ $(function() {
 						$("#results").removeClass().empty().addClass("alert alert-danger fade in text-center").html("<strong>Hold on there...</strong> " + data.msg);
 					} else {
 						$(".tab-content").remove();
-						$("#results").removeClass().empty().addClass("alert alert-success fade in text-center").html("<strong>Message decrypted!</strong> " + vars.SUCCESS_DECRYPTION);
-						$("#results").after("<pre>" + data.msg + "</pre>");
+						$("#results").removeClass().empty().html("<pre>" + data.msg + "</pre>");
+						$("#results").after('<p class="text-warning text-center"><span class="glyphicon glyphicon-warning-sign"></span> ' + vars.SUCCESS_DECRYPTION + '</p>');
 					}
 				},
 				error: function(xhr, status, error) {
