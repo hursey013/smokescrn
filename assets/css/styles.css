@@ -1,3 +1,12 @@
+body {
+	background-color:#c7c6c6;
+}
+#main {
+	background:url("../images/ssshh.png") no-repeat right 20px;
+}
+#main>div>div.col-md-8 {
+	padding-top:110px;
+}
 .tab-content form {
 	margin-top:20px;
 }
@@ -16,4 +25,14 @@
 }
 a[data-toggle="popover"] {
 	text-decoration:none !important;
+}
+/* Extra Small Devices, Phones */ 
+ @media only screen and (max-width : 480px) {
+	 #main {
+		 background:url("../images/ssshh.png") no-repeat center 20px;
+	 }
+	#main>div>div.col-md-8 {
+		padding-top:360px;
+		text-align:center;
+	}
 }

@@ -9,9 +9,10 @@ require_once 'common.php';
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title><?php echo SITE_NAME; ?></title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker3.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.9.4/ladda-themeless.min.css">
+		<link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="assets/css/styles.css">
 		<!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -22,12 +23,16 @@ require_once 'common.php';
 	<body>
 
 		<div class="container">
+<div class="row">
+	
 
-			<div class="col-md-6 col-md-offset-3">
+			<div id ="main" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+				<div class="row">
+					<div class="col-md-8">
+						<h1><a class="link-black" href="<?php echo SITE_URL; ?>"><?php echo SITE_NAME; ?></a></h1>
+						<h4>Self-destructing encrypted messages</h4>
+					</div>
 
-				<div class="page-header text-center">
-					<h1><a class="link-black" href="<?php echo SITE_URL; ?>"><?php echo SITE_NAME; ?></a></h1>
-					<h4>Self-destructing encrypted messages</h4>
 				</div>
 
 				<div id="results"></div>
@@ -36,12 +41,15 @@ require_once 'common.php';
 
 					<!--ENCRYPT-->
 					<div role="tabpanel" class="tab-pane <?php if(!$referral){echo 'active';}?>" id="encrypt">
-						<form id="form_encrypt">
-							<div class="form-group">
-								<label for="message">Your secret message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Messages are securely transferred, stored using AES-128 encryption, and permanently deleted once viewed."></a></label>
-								<textarea class="form-control" id="message" name="message" rows="3" maxlength="2500" required></textarea>
-								<span class="help-block"><span id="chars" style="font-weight:bold;">2500</span> characters remaining.  Plain text only.</span>
+						<form id="form_encrypt" data-disable="false">
+							<div class="row">
+								<div class="form-group col-sm-6">
+									<label for="message">Your secret message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Messages are securely transferred, stored using AES-128 encryption, and permanently deleted once viewed."></a></label>
+									<textarea class="form-control" id="message" name="message" rows="3" maxlength="2500" required></textarea>
+									<span class="help-block"><span id="chars" style="font-weight:bold;">2500</span> characters remaining.</span>
+								</div>
 							</div>
+
 							<div class="form-group">
 								<label for="encrypt_password">Add a password to your message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your password is never stored on our server, so if you forget it...your meassage will be unretrievable!"></a></label>
 								<div class="form-inline row">
@@ -83,7 +91,7 @@ require_once 'common.php';
 						<div class="checkbox">
 							<label>
 								<input type="checkbox" name="show_email_sender">
-								Get notified when the message is viewed <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your email address will be encrypted along with your message and will never be visible to anyone else."></a>
+								Get notified when message is viewed <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your email address will be encrypted along with your message and will never be visible to anyone else."></a>
 							</label>
 						</div>								
 
@@ -111,10 +119,10 @@ require_once 'common.php';
 
 				<!--DECRYPT-->
 				<div role="tabpanel" class="tab-pane <?php if($referral){echo 'active';}?>" id="decrypt">
-					<form id="form_decrypt">
+					<form id="form_decrypt" data-disable="false">
 						<div class="form-group">
 							<label for="id">Message ID</label>
-							<input type="text" class="form-control" id="id" name="id" placeholder="<?php if($use_orchestrate){echo "0b519785ab20dde5";}else{echo "o8AZv0hGh";}?>" required  maxlength="16" value="<?php if($referral){echo $_GET["id"];}?>" readonly>
+							<input type="text" class="form-control" id="id" name="id" placeholder="<?php if($use_orchestrate){echo "0b519785ab20dde5";}else{echo "o8AZv0hGh";}?>" required  maxlength="16" value="<?php if($referral){echo $_GET["id"];}?>" disabled>
 						</div>
 						<div class="form-group">
 							<label for="decrypt_password">Password</label>
@@ -131,7 +139,7 @@ require_once 'common.php';
 			<p class="small text-center">&copy; <?php echo date('Y'); ?> <a href="index.php"><?php echo SITE_NAME; ?></a>. All rights reserved. | <a href="https://github.com/hursey013/smokescrn">Github</a></p>
 
 		</div>
-
+			</div>
 		</div>
 
 	<script type="text/javascript">
