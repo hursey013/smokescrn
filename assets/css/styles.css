@@ -1,38 +1,62 @@
 body {
-	background-color:#c7c6c6;
+	background-color: #c7c6c6;
 }
+
 #main {
-	background:url("../images/ssshh.png") no-repeat right 20px;
+	background: url("../images/ssshh.png") no-repeat right -20px;
 }
+
 #main>div>div.col-md-8 {
-	padding-top:110px;
+	padding-top: 40px;
 }
-.tab-content form {
-	margin-top:20px;
+
+#logo {
+	font-family: 'Roboto', sans-serif;
+	background: url('../images/logo.png') no-repeat -15px top;
+	padding-top: 50px;
+	margin-top: 0;
 }
+
+#tagline {
+	font-family: 'Roboto', sans-serif;
+}
+
+.tab-content form, #results {
+	margin-top: 20px;
+}
+
 .tab-content .col-sm-6 input {
-	width:100%;
+	width: 100%;
 }
+
 .tab-content .col-sm-6 .help-block {
-	margin-bottom:0;
+	margin-bottom: 0;
 }
+
 .tab-content .btn {
-	margin-top:30px;
+	margin-top: 30px;
 }
+
 .link-black {
-	color:#333 !important;
-	text-decoration:none !important;
+	color: #333 !important;
+	text-decoration: none !important;
 }
+
 a[data-toggle="popover"] {
-	text-decoration:none !important;
+	text-decoration: none !important;
 }
 /* Extra Small Devices, Phones */ 
- @media only screen and (max-width : 480px) {
-	 #main {
-		 background:url("../images/ssshh.png") no-repeat center 20px;
-	 }
+@media only screen and (max-width : 480px) {
+	#main {
+		background: url("../images/ssshh.png") no-repeat center -20px;
+	}
+
+	#logo {
+		background: none;
+	}
+
 	#main>div>div.col-md-8 {
-		padding-top:360px;
-		text-align:center;
+		padding-top: 275px;
+		text-align: center;
 	}
 }
