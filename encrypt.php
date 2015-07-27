@@ -160,6 +160,7 @@ if (!$errors) {
 			try {
 				$sendgrid->send($sendemail);
 				$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_SENDGRID);
+				$logger->info('Message ID: ' . $id . ', ' . LOG_MESSAGE_CREATED);
 				response($id, false);
 			} catch(\SendGrid\Exception $e) {
 				foreach($e->getErrors() as $er) {
@@ -175,6 +176,7 @@ if (!$errors) {
 			// Check for email errors and provide a response
 			if($email){
 				$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_PHP);
+				$logger->info('Message ID: ' . $id . ', ' . LOG_MESSAGE_CREATED);
 				response($id, false);
 			} else {
 				response(EMAIL_ERROR, true, $logger);		
@@ -185,6 +187,7 @@ if (!$errors) {
 	} else {
 		// Provide response
 		$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_NONE);
+		$logger->info('Message ID: ' . $id . ', ' . LOG_MESSAGE_CREATED);
 		response($id, false);
 	}
 

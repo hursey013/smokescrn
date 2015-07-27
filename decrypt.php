@@ -133,7 +133,7 @@ if (!$errors) {
 	}	
 		
 	// Provide response
-	$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_NONE);
+	$logger->info('Message ID: ' . $id . ', ' . LOG_MESSAGE_VIEWED);
 	response($data["message"], false);
 
 } else {
