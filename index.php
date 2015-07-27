@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:100,300">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/css/styles.css">
+	<link rel="stylesheet" href="assets/css/animate.min.css">
 	<!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -29,7 +30,7 @@
 			<div id="main" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
 				<div class="row">
 					<div class="col-md-8">
-						<h1 id="logo"><a class="link-black" href="<?php echo SITE_URL; ?>"><span style="font-weight:300;">Smoke</span><span style="font-weight:100;">SCRN</span></a></h1>
+						<h1 id="logo" class="animated fadeIn"><a class="link-black" href="<?php echo SITE_URL; ?>"><span style="font-weight:300;">Smoke</span><span style="font-weight:100;">SCRN</span></a></h1>
 						<h4 id="tagline" style="font-weight:300;"><?php echo SITE_TAGLINE; ?></h4>
 					</div>
 				</div>
@@ -44,17 +45,17 @@
 						<form id="form_encrypt" data-disable="false">
 							<label for="message">Your secret message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Messages are securely transferred, stored using AES-128 encryption, and permanently deleted once viewed."></a></label> 
 							<div class="row">
-								<div class="col-sm-6">
+								<div class="col-sm-6" id="expandContainer">
 									<div class="form-group">
 										<textarea class="form-control" id="message" name="message" rows="3" maxlength="1000" required></textarea>
-										<span class="help-block"><span id="chars" style="font-weight:bold;">1000</span> characters remaining.</span>
+										<span class="help-block"><span id="chars" style="font-weight:bold;">1000</span> characters remaining. <span class="hidden-xs">[<a href="#" id="expand">Expand</a>]</span></span>
 									</div>
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label for="encrypt_password">Add a password to your message:
-									<a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your password is never stored on our server, so if you forget it...your meassage will be unretrievable!"></a>
+									<a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Your password is never stored on our server, so if you forget it...your message will be unretrievable!"></a>
 								</label>
 								<div class="form-inline row">
 									<div class="form-group col-sm-6">
@@ -80,7 +81,7 @@
 							<div class="form-group" id="show_email_recipient" style="display:none;">
 								<div class="form-inline row">
 									<div class="form-group col-sm-6">
-										<input type="email" class="form-control" id="email_recipient" name="email_recipient" placeholder="recipient@some.com">
+										<input type="email" class="form-control" id="email_recipient" name="email_recipient" placeholder="recipient@provider.com">
 										<span class="help-block with-errors"></span>
 									</div>
 									<div class="form-group col-sm-6">
@@ -98,7 +99,7 @@
 							</div>
 
 							<div class="form-group" id="show_email_sender" style="display:none;">
-								<input type="email" class="form-control" id="email_sender" name="email_sender" placeholder="myemail@some.com">
+								<input type="email" class="form-control" id="email_sender" name="email_sender" placeholder="me@provider.com">
 								<span class="help-block with-errors"></span>
 							</div>
 

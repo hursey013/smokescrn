@@ -12,7 +12,8 @@ body {background-color: #c7c6c6;}
 .tab-content .col-sm-6 input {width: 100%;}
 .tab-content .col-sm-6 .help-block {margin-bottom: 0;}
 .tab-content .btn {margin-top: 30px;}
-.link-black {color: #333 !important; text-decoration: none !important;}
+.link-black {color: #333; text-decoration: none !important;}
+.link-black:hover {color: #000;}
 a[data-toggle="popover"] {text-decoration: none !important;}
 
 /* Extra Small Devices, Phones */ 

@@ -25,6 +25,13 @@ $(function() {
 		$('#chars').text(length);
 	});
 
+	// Expand textarea
+	$('#expand').click(function(){
+		$("#expandContainer").toggleClass("col-sm-6 col-sm-12");
+		var text = $(this).text();
+		$(this).text(text == "Expand" ? "Collapse" : "Expand");
+	});	
+
 	// Show hidden form fields when checkbox is selected
 	$('input[type="checkbox"]').click(function(){
 		var item = $(this).attr('name');
@@ -58,6 +65,7 @@ $(function() {
 					$("#results").show().removeClass().empty().addClass("alert alert-danger fade in text-center").html('<strong>Hold on there...</strong> ' + vars.INTERNAL_ERROR);
 				},
 				complete: function() {
+					var l = $("#form_encrypt button").ladda();
 					l.ladda('stop');
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
@@ -93,6 +101,7 @@ $(function() {
 					$("#results").show().removeClass().empty().addClass("alert alert-danger fade in text-center").html('<strong>Hold on there...</strong> ' + vars.INTERNAL_ERROR);
 				},
 				complete: function() {
+					var l = $("#form_decrypt button").ladda();
 					l.ladda('stop');
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
