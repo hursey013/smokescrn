@@ -8,11 +8,11 @@
 
 <p>Last updated: July 28, 2015</p>
 
-<p>SmokeSCRN ("us", "we", or "our") operates the https://smokescrn.com website (the "Service").</p>
+<p><?php echo SITE_NAME; ?> ("us", "we", or "our") operates the https://smokescrn.com website (the "Service").</p>
 
 <p>This page informs you of our policies regarding the collection, use and disclosure of Personal Information when you use our Service.</p>
 
-<p>Now that that's out of the way, the rest is pretty simple.  We don’t store any of your Personal Information.  Any information we collect from you is encrypted and permanently deleted once the message you send is viewed or expires. </p>
+<p class="lead">We don’t store any of your Personal Information.  Any information we collect from you is encrypted and is permanently deleted once the message has been viewed or passes it's expiration date.</p>
 
 <p><strong>Service Providers</strong></p>
 

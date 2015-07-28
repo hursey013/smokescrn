@@ -28,7 +28,7 @@
 			<div id="main" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
 				<div class="row">
 					<div id="brand" class="col-md-8">
-						<h1 id="logo"><a class="link-black" href="<?php echo SITE_URL; ?>"><span style="font-weight:300;">Smoke</span><span style="font-weight:100;">SCRN</span></a></h1>
+						<h1 id="logo"><a class="link-black" href="<?php echo SITE_URL; ?>"><span style="font-weight:300;">Smoke</span><span style="font-weight:100;">scrn</span></a></h1>
 						<h4 id="tagline" style="font-weight:300;"><?php echo SITE_TAGLINE; ?></h4>
 					</div>
 				</div>
