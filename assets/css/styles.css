@@ -1,6 +1,6 @@
 body {background-color: #c7c6c6;}
-#main {background: url("../images/ssshh.png") no-repeat right -20px;}
-#main>div>div.col-md-8 {padding-top: 40px;}
+.home #main {background: url("../images/ssshh.png") no-repeat right -20px;}
+#brand {padding-top: 40px;}
 #logo {
 	font-family: 'Roboto', sans-serif;
 	background: url('../images/logo.png') no-repeat -15px top;
@@ -18,7 +18,7 @@ a[data-toggle="popover"] {text-decoration: none !important;}
 
 /* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 480px) {
-	#main {background: url("../images/ssshh.png") no-repeat center -20px;}
-	#main>div>div.col-md-8 {padding-top: 300px; text-align: center;}
-	#logo {background: none;}	
+	.home #main {background: url("../images/ssshh.png") no-repeat center -20px;}
+	.home #brand {padding-top: 300px; text-align: center;}
+	.home #logo {background: none;}	
 }

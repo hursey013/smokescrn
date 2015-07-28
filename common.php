@@ -9,6 +9,11 @@ if (DEBUG_MODE == true){
 	ini_set('display_errors', 1);
 }
 
+// Determine if it's the homepage
+if (strpos($_SERVER['SCRIPT_NAME'], 'index.php') !== false){
+	$homepage = true;
+}
+
 // Determine if a message is being accessed from link
 $referral = (isset($_GET["id"]) && (!empty($_GET["id"])));
 
