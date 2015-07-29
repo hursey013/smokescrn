@@ -1,5 +1,7 @@
 <?php
 require_once 'common.php';
+use \Defuse\Crypto\Crypto;
+use \Defuse\Crypto\Exception as Ex;
 
 // Initial validation state
 $errors = false;
@@ -111,16 +113,16 @@ if (!$errors) {
 	// Encrypt data, reference: https://github.com/defuse/php-encryption/
 	try {
 		$data_encrypted = Crypto::Encrypt($data, $key);
-	} catch (CryptoTestFailedException $ex) {
+	} catch (Ex\CryptoTestFailedException $ex) {
 		response(ENCRYPTION_UNSAFE, true, $logger);
-	} catch (CannotPerformOperationException $ex) {
+	} catch (Ex\CannotPerformOperationException $ex) {
 		response(DECRYPTION_UNSAFE, true, $logger);
 	}		
 
 	// Store the encrypted data
 	$array = array(
-		'salt' => base64_encode($salt),
-		'secret' => base64_encode($data_encrypted),
+		'salt' => Crypto::binToHex($salt),
+		'secret' => Crypto::binToHex($data_encrypted),
 		'expiration_date' => strtotime($expiration_date . ' +1 day')
 	);
 

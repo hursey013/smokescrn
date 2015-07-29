@@ -1,7 +1,6 @@
 <?php
-require_once 'vendor/autoload.php';
 require_once 'config.php';
-use andrefelipe\Orchestrate\Client;
+require_once 'vendor/autoload.php';
 
 // PHP debugging
 if (DEBUG_MODE == true){
@@ -19,7 +18,7 @@ $referral = (isset($_GET["id"]) && (!empty($_GET["id"])));
 $logger = new Katzgrau\KLogger\Logger(LOGGING_BASE_DIR, Psr\Log\LogLevel::DEBUG);
 
 // Configure data store
-$client = new Client(ORCHESTRATE_API_KEY);	
+$client = new andrefelipe\Orchestrate\Client(ORCHESTRATE_API_KEY);	
 
 // Configure email settings
 $sendgrid = new SendGrid(SENDGRID_API_KEY);

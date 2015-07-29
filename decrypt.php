@@ -1,5 +1,7 @@
 <?php
 require_once 'common.php';
+use \Defuse\Crypto\Crypto;
+use \Defuse\Crypto\Exception as Ex;
 
 // Initial validation state
 $errors = false;
@@ -46,8 +48,8 @@ if(strlen($password) > 16) {
 // Validation: check if message exists
 $item = $client->get(ORCHESTRATE_COLLECTION, $id);
 if ($item->isSuccess()) {
-	$salt = base64_decode($item->salt);
-	$data_encrypted = base64_decode($item->secret);
+	$salt = Crypto::hexToBin($item->salt);
+	$data_encrypted = Crypto::hexToBin($item->secret);
 } else {
 	$errors = true;
 	$logger->error('Message ID: ' . $id . ', ' . $item->getStatus());
@@ -65,11 +67,11 @@ if (!$errors) {
 	// Decrypt data, reference: https://github.com/defuse/php-encryption/
 	try {
 		$data_decrypted = Crypto::Decrypt($data_encrypted, $key);
-	} catch (InvalidCiphertextException $ex) { // VERY IMPORTANT
+	} catch (Ex\InvalidCiphertextException $ex) { // VERY IMPORTANT
 		response(DECRYPTION_PASSWORD_WRONG, true, $logger);
-	} catch (CryptoTestFailedException $ex) {
+	} catch (Ex\CryptoTestFailedException $ex) {
 		response(ENCRYPTION_UNSAFE, true, $logger);
-	} catch (CannotPerformOperationException $ex) {
+	} catch (Ex\CannotPerformOperationException $ex) {
 		response(DECRYPTION_UNSAFE, true, $logger);
 	}			
 
