@@ -98,7 +98,7 @@ if (!$errors) {
 
 	// Create encryption key
 	$length = 16;
-	$iterations = 100000;
+	$iterations = PASSWORD_ITERATIONS;
 	$salt = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
 	$key = hash_pbkdf2("sha256", $password, $salt . PASSWORD_PEPPER, $iterations, $length);
 
@@ -123,65 +123,37 @@ if (!$errors) {
 		'secret' => base64_encode($data_encrypted),
 		'expiration_date' => strtotime($expiration_date . ' +1 day')
 	);
-	
-	if($use_orchestrate){
-		// Check if Orchestrate is enabled
-		$item = $client->post(ORCHESTRATE_COLLECTION, $array);
-		$id = $item->getKey();
-		$logger->info('Message ID: ' . $id . ', ' . LOG_ORCHESTRATE_POST . ' Expiration date: ' . $expiration_date);
-	} else {
-		// Fallback to Flywheel
-		$item = new \JamesMoss\Flywheel\Document($array);
-		$repo->store($item);
-		$id = $item->getId();
-		$logger->info('Message ID: ' . $id . ', ' . LOG_FLYWHEEL_POST . ' Expiration date: ' . $expiration_date);
-	}
+
+	$item = $client->post(ORCHESTRATE_COLLECTION, $array);
+	$id = $item->getKey();
+	$logger->info('Message ID: ' . $id . ', ' . LOG_ORCHESTRATE_POST . ' Expiration date: ' . $expiration_date);
 
 	// Send email to recipient
 	if(!empty($email_recipient)){
 
 		// Email body
 		$email_content = '<p>' . EMAIL_BODY_SENT . '</p>';
-		$email_content .= '<p>Access it at: <a href="' . SITE_URL . '/?id=' . $id . '" target="_blank">' . SITE_URL . '/?id=' . $id . '</a></p>';
+		$email_content .= '<p>Access it at: <a href="' . SITE_URL . '/' . $id . '" target="_blank">' . SITE_URL . '/' . $id . '</a></p>';
 		if(!empty($email_password_hint)){
 			$email_content .= '<p><strong>Password hint: </strong>' . $email_password_hint;
 		}
 		$email_content .= '<p>---</p><p>Thank you,<br />' . SITE_NAME . '</p>';
 
-		if($use_sendgrid){
-			
-			// Check if SendGrid is enabled
-			$sendemail->addTo($email_recipient)
-				->setFrom(EMAIL_FROM_ADDRESS)
-				->setSubject(EMAIL_SUBJECT_SENT)
-				->setHtml($email_content);
+		$sendemail->addTo($email_recipient)
+			->setFrom(EMAIL_FROM_ADDRESS)
+			->setSubject(EMAIL_SUBJECT_SENT)
+			->setHtml($email_content);
 
-			// Check for email errors and provide a response
-			try {
-				$sendgrid->send($sendemail);
-				$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_SENDGRID);
-				$logger->info('Message ID: ' . $id . ', ' . LOG_MESSAGE_CREATED);
-				response($id, false);
-			} catch(\SendGrid\Exception $e) {
-				foreach($e->getErrors() as $er) {
-					response($er, true, $logger);
-				}
+		// Check for email errors and provide a response
+		try {
+			$sendgrid->send($sendemail);
+			$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_SENDGRID);
+			$logger->info('Message ID: ' . $id . ', ' . LOG_MESSAGE_CREATED);
+			response($id, false);
+		} catch(\SendGrid\Exception $e) {
+			foreach($e->getErrors() as $er) {
+				response($er, true, $logger);
 			}
-			
-		} else {	
-			
-			// Fallback to PHP Mail
-			$email = mail($email_recipient, EMAIL_SUBJECT_SENT, $email_content, $email_headers);
-			
-			// Check for email errors and provide a response
-			if($email){
-				$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_PHP);
-				$logger->info('Message ID: ' . $id . ', ' . LOG_MESSAGE_CREATED);
-				response($id, false);
-			} else {
-				response(EMAIL_ERROR, true, $logger);		
-			}
-			
 		}
 
 	} else {

@@ -92,7 +92,7 @@
 		<form id="form_decrypt" data-disable="false">
 			<div class="form-group">
 				<label for="id">Message ID</label>
-				<input type="text" class="form-control" id="id" name="id" placeholder="<?php if($use_orchestrate){echo "0b519785ab20dde5";}else{echo "o8AZv0hGh";}?>" required maxlength="16" value="<?php if($referral){echo $_GET["id"];}?>" readonly>
+				<input type="text" class="form-control" id="id" name="id" placeholder="0b519785ab20dde5" required maxlength="16" value="<?php if($referral){echo $_GET["id"];}?>" readonly>
 			</div>
 			<div class="form-group">
 				<label for="decrypt_password">Password</label>

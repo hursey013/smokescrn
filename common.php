@@ -9,10 +9,8 @@ if (DEBUG_MODE == true){
 	ini_set('display_errors', 1);
 }
 
-// Determine if it's the homepage
-if (strpos($_SERVER['SCRIPT_NAME'], 'index.php') !== false){
-	$homepage = true;
-}
+// Determine if user is on the homepage
+$homepage = (strpos($_SERVER['SCRIPT_NAME'], 'index.php') !== false);
 
 // Determine if a message is being accessed from link
 $referral = (isset($_GET["id"]) && (!empty($_GET["id"])));
@@ -21,31 +19,11 @@ $referral = (isset($_GET["id"]) && (!empty($_GET["id"])));
 $logger = new Katzgrau\KLogger\Logger(LOGGING_BASE_DIR, Psr\Log\LogLevel::DEBUG);
 
 // Configure data store
-if(defined('ORCHESTRATE_API_KEY')){
-	// Determine if Orchestrate.io is being used
-	$use_orchestrate = true;
-	$client = new Client(ORCHESTRATE_API_KEY);	
-} else {
-	// Fallback on FlyWheel
-	$use_orchestrate = false;
-	$config = new \JamesMoss\Flywheel\Config(FLYWHEEL_BASE_DIR);
-	$repo = new \JamesMoss\Flywheel\Repository(FLYWHEEL_REPO_DIR, $config);
-}
+$client = new Client(ORCHESTRATE_API_KEY);	
 
 // Configure email settings
-if(defined('SENDGRID_API_KEY')){
-	// Determine if SendGrid is being used
-	$use_sendgrid = true;
-	$sendgrid = new SendGrid(SENDGRID_API_KEY);
-	$sendemail = new SendGrid\Email();
-} else {
-	// Fallback on PHP Mail
-	$use_sendgrid = false;
-	$email_headers = "From: " . EMAIL_FROM_ADDRESS . "\r\n";
-	$email_headers .= "Reply-To: ". EMAIL_FROM_ADDRESS . "\r\n";
-	$email_headers .= "MIME-Version: 1.0\r\n";
-	$email_headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";		
-}
+$sendgrid = new SendGrid(SENDGRID_API_KEY);
+$sendemail = new SendGrid\Email();
 
 // Function to return JSON to the requesting page
 function response($msg, $errors, $logger = null){

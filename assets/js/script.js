@@ -58,7 +58,7 @@ $(function() {
 					} else {
 						$(".tab-content").remove();
 						$("#results").show().removeClass().empty().addClass("alert alert-success fade in text-center").html("<strong>Message encrypted!</strong> " + vars.SUCCESS_ENCRYPTION);
-						$("#results").after('<div class="panel panel-default"><div class="panel-body text-center"><p>To access your message, use the following link:</p><p class="lead"><mark><a class="link-black" href="' +  vars.URL + '/?id=' +data.msg + '" target="_blank">' +  vars.URL + '/?id=' +data.msg + '</a></mark></p><p class="text-warning"><span class="glyphicon glyphicon-warning-sign"></span> This link will not be provided again, so keep it in a safe location!</p></div></div><a href="index.php" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-home"></span> Return to homepage</a>');
+						$("#results").after('<div class="panel panel-default"><div class="panel-body text-center"><p>To access your message, use the following link:</p><p class="lead"><mark><a class="link-black" href="' +  vars.URL + '/' +data.msg + '" target="_blank">' +  vars.URL + '/' + data.msg + '</a></mark></p><p class="text-warning"><span class="glyphicon glyphicon-warning-sign"></span> This link will not be provided again, so keep it in a safe location!</p></div></div><a href="index.php" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-home"></span> Return to homepage</a>');
 					}
 				},
 				error: function(xhr, status, error) {

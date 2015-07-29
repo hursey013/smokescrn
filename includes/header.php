@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>
-		<?php echo SITE_NAME; ?> :: <?php echo SITE_TAGLINE; ?>
+		&lt;<?php echo SITE_NAME; ?>&gt; :: <?php echo SITE_TAGLINE; ?>
 	</title>
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
@@ -28,7 +28,7 @@
 			<div id="main" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
 				<div class="row">
 					<div id="brand" class="col-md-8">
-						<h1 id="logo"><a class="link-black" href="<?php echo SITE_URL; ?>"><span style="font-weight:300;">Smoke</span><span style="font-weight:100;">scrn</span></a></h1>
+						<h1 id="logo"><a class="link-black" href="<?php echo SITE_URL; ?>"><span style="font-weight:300;">&lt;smokescrn&gt;</span></a></h1>
 						<h4 id="tagline" style="font-weight:300;"><?php echo SITE_TAGLINE; ?></h4>
 					</div>
 				</div>

@@ -38,38 +38,20 @@ if((empty($id))
 }
 
 // Validation: check if message ID is too long
-if($use_orchestrate){
-	if(strlen($password) > 16) {
-		$errors = true;
-		response(VALIDATION_MESSAGE_LENGTH, $errors, $logger);
-	}	
-} else {
-	if(strlen($password) > 8) {
-		$errors = true;
-		response(VALIDATION_MESSAGE_LENGTH, $errors, $logger);
-	}	
-}
+if(strlen($password) > 16) {
+	$errors = true;
+	response(VALIDATION_MESSAGE_LENGTH, $errors, $logger);
+}	
 
 // Validation: check if message exists
-if($use_orchestrate){
-	$item = $client->get(ORCHESTRATE_COLLECTION, $id);
-	if ($item->isSuccess()) {
-		$salt = base64_decode($item->salt);
-		$data_encrypted = base64_decode($item->secret);
-	} else {
-		$errors = true;
-		$logger->error('Message ID: ' . $id . ', ' . $item->getStatus());
-		response(VALIDATION_MESSAGE_NOTFOUND, $errors, $logger);
-	}
+$item = $client->get(ORCHESTRATE_COLLECTION, $id);
+if ($item->isSuccess()) {
+	$salt = base64_decode($item->salt);
+	$data_encrypted = base64_decode($item->secret);
 } else {
-	if(!$repo->findById($id)) {
-		$errors = true;
-		response(VALIDATION_MESSAGE_NOTFOUND, $errors, $logger);
-	} else {
-		$item = $repo->findById($id);
-		$salt = base64_decode($item->salt);
-		$data_encrypted = base64_decode($item->secret);
-	}
+	$errors = true;
+	$logger->error('Message ID: ' . $id . ', ' . $item->getStatus());
+	response(VALIDATION_MESSAGE_NOTFOUND, $errors, $logger);
 }
 
 // If all of the above validation checks pass, continue on
@@ -77,7 +59,7 @@ if (!$errors) {
 
 	// Create decryption key
 	$length = 16;
-	$iterations = 100000;
+	$iterations = PASSWORD_ITERATIONS;
 	$key = hash_pbkdf2("sha256", $password, $salt . PASSWORD_PEPPER, $iterations, $length);	
 
 	// Decrypt data, reference: https://github.com/defuse/php-encryption/
@@ -92,43 +74,24 @@ if (!$errors) {
 	}			
 
 	// Delete message
-	if($use_orchestrate){
-		// Check if Orchestrate is enabled
-		$item = $client->purge(ORCHESTRATE_COLLECTION, $id);
-		$logger->info('Message ID: ' . $id . ', ' . LOG_ORCHESTRATE_PURGE);
-	} else {
-		// Fallback to Flywheel
-		$repo->delete($id);
-		$logger->info('Message ID: ' . $id . ', ' . LOG_FLYWHEEL_PURGE);
-	}
+	$item = $client->purge(ORCHESTRATE_COLLECTION, $id);
+	$logger->info('Message ID: ' . $id . ', ' . LOG_ORCHESTRATE_PURGE);
 
 	$data = unserialize($data_decrypted);
 	
 	// Send email to sender
 	if(!empty($data["email_sender"])){
 
-		// Email body
 		$email_content = '<p>' . EMAIL_BODY_VIEWED . '</p>';
 		$email_content .= '<p>---</p><p>Thank you,<br />' . SITE_NAME . '</p>';
 
-		if($use_sendgrid){
-			
-		// Check if SendGrid is enabled
-			$sendemail->addTo($data["email_sender"])
-				->setFrom(EMAIL_FROM_ADDRESS)
-				->setSubject(EMAIL_SUBJECT_VIEWED)
-				->setHtml($email_content);
+		$sendemail->addTo($data["email_sender"])
+			->setFrom(EMAIL_FROM_ADDRESS)
+			->setSubject(EMAIL_SUBJECT_VIEWED)
+			->setHtml($email_content);
 
-			$sendgrid->send($sendemail);
-			$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_SENDGRID);
-			
-		} else {	
-			
-			// Fallback to PHP Mail
-			mail($data["email_sender"], EMAIL_SUBJECT_VIEWED, $email_content, $email_headers);
-			$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_PHP);
-			
-		}
+		$sendgrid->send($sendemail);
+		$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_SENDGRID);
 
 	}	
 		

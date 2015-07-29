@@ -3,6 +3,7 @@
 define("SITE_NAME", "SuperSecret");
 define("SITE_TAGLINE", "Self-destructing encrypted messages");
 define("SITE_URL", "http://secretwebsite.com"); // No trailing slash
+define("PASSWORD_ITERATIONS", "100000");
 define("PASSWORD_PEPPER", "INSERT YOUR PEPPER");
 define("DEBUG_MODE", false);
 
