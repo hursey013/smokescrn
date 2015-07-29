@@ -3,7 +3,7 @@
 
 				<!--COPYRIGHT-->
 				<p class="small text-center">&copy; <?php echo date('Y'); ?> <a href="index.php"><?php echo SITE_NAME; ?></a>. All rights reserved.</p>
-<p class="small text-center"><a href="about.php">About</a> | <a href="privacy.php">Privacy Policy</a> | <a href="terms.php">Terms &amp; Conditions</a> | <a href="mailto:inquiries@smokescrn.com">Contact</a> | <a href="https://github.com/hursey013/smokescrn">Github</a></p>
+<p class="small text-center"><a href="about.php">About</a> | <a href="privacy.php">Privacy</a> | <a href="terms.php">Terms</a> | <a href="mailto:inquiries@smokescrn.com">Contact</a> | <a href="https://github.com/hursey013/smokescrn">Github</a></p>
 
 			</div>
 		</div>
