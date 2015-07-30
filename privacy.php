@@ -8,11 +8,11 @@
 
 <p>Last updated: July 28, 2015</p>
 
-<p><?php echo SITE_NAME; ?> ("us", "we", or "our") operates the https://smokescrn.com website (the "Service").</p>
+<p><?php echo SITE_NAME; ?> ("us", "we", or "our") operates the smokescrn.com website (the "Service").</p>
 
 <p>This page informs you of our policies regarding the collection, use and disclosure of Personal Information when you use our Service.</p>
 
-<p class="lead">We don’t store any of your Personal Information.  Any information we collect from you is encrypted and is permanently deleted once the message has been viewed or passes it's expiration date.</p>
+<p class="lead">We don’t store any of your Personal Information.  Any information we collect from you is encrypted and permanently deleted once it's viewed or expired.</p>
 
 <p><strong>Service Providers</strong></p>
 
@@ -23,6 +23,10 @@
 <p><strong>Security</strong></p>
 
 <p>The security of your Personal Information is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Information, we cannot guarantee its absolute security.</p>
+
+<p><strong>Google Analytics</strong></p>
+
+<p>We use a tool called Google Analytics to collect information about use of this site. Google Analytics collects information such as how often users visit this site and what other sites they used prior to coming to this site. We use the information we get from Google Analytics only to improve this site. Google Analytics collects only the IP address assigned to you on the date you visit this site, rather than your name or other identifying information. We do not combine the information collected through the use of Google Analytics with personally identifiable information.</p>
 
 <p><strong>Changes To This Privacy Policy</strong></p>
 

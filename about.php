@@ -7,7 +7,7 @@
 
 <p><strong>So what's this thing for?</strong></p>
 <p>
-I'll cut right to it.  I built this app for my own selfish reasons.  Every time I need to share a password, account number, or other personal information with someone, I cringe the moment I push the send button.  I know my message might be stored on some server for decades, or exposed for the world to see if the accounts are ever compromised.  Call me paranoid, but I want something a little more secure. That's where <?php echo SITE_NAME; ?> comes in.
+I'll cut right to it.  I built this app for my own selfish reasons.  Every time I share a password, account number, or personal information with someone, I cringe the moment I push the send button.  I know my message might be stored on some server forever, or exposed for the world to see if our accounts are ever compromised.  Call me paranoid, but I wanted something a little more secure. That's where <?php echo SITE_NAME; ?> comes in.
 </p>
 <p><strong>Ok, how does it work?</strong></p>
 <p>

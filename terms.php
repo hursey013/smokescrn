@@ -8,7 +8,7 @@
 
 <p>Last updated: July 28, 2015</p>
 
-<p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the http://smokescrn.com website (the "Service") operated by <?php echo SITE_NAME; ?> ("us", "we", or "our").</p>
+<p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the smokescrn.com website (the "Service") operated by <?php echo SITE_NAME; ?> ("us", "we", or "our").</p>
 
 <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
 
