@@ -94,7 +94,7 @@ $(function() {
 					} else {
 						$(".tab-content").remove();
 						$("#results").show().removeClass().empty().addClass("alert alert-warning fade in text-center").html('<span class="glyphicon glyphicon-warning-sign"></span> ' + vars.SUCCESS_DECRYPTION);
-						$("#results").after('<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Message contents:</h3></div><div class="panel-body"><pre>' + data.msg + '</pre></div></div><a href="index.php" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-home"></span> Return to homepage</a>');
+						$("#results").after('<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Secret message:</h3></div><div class="panel-body"><pre>' + data.msg + '</pre></div></div><a href="index.php" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-home"></span> Return to homepage</a>');
 					}
 				},
 				error: function(xhr, status, error) {
