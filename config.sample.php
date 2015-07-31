@@ -2,9 +2,8 @@
 // General Settings
 define("SITE_NAME", "SuperSecret");
 define("SITE_TAGLINE", "Self-destructing encrypted messages");
-define("SITE_URL", "http://secretwebsite.com"); // No trailing slash
+define("SITE_URL", "https://secretwebsite.com"); // No trailing slash
 define("PASSWORD_ITERATIONS", "100000");
-define("PASSWORD_PEPPER", "INSERT YOUR PEPPER");
 define("DEBUG_MODE", false);
 
 // Email Settings
@@ -17,18 +16,12 @@ define("EMAIL_FROM_ADDRESS", "me@secretwebsite.com");
 // Logging Settings
 define("LOGGING_BASE_DIR", __DIR__."/../logs"); // Writable directory
 
-// Flywheel Settings
-define("FLYWHEEL_BASE_DIR", __DIR__."/data"); // Writable directory
-define("FLYWHEEL_REPO_DIR", "secrets");
-
-// OPTIONAL EXTERNAL APIS
-
 // SendGrid API Settings
-//define("SENDGRID_API_KEY", "INSERT YOUR API");
+define("SENDGRID_API_KEY", "INSERT YOUR API");
 
 // Orchestrate.io API Settings
-//define("ORCHESTRATE_API_KEY", "INSERT YOUR API");
-//define("ORCHESTRATE_COLLECTION", "secrets");
+define("ORCHESTRATE_API_KEY", "INSERT YOUR API");
+define("ORCHESTRATE_COLLECTION", "secrets");
 
 // User Notifications
 define("VALIDATION_POST", "Form data not received as a POST request.");
@@ -45,19 +38,15 @@ define("VALIDATION_MESSAGE_NOTFOUND", "The message ID you entered has expired or
 define("ENCRYPTION_UNSAFE", "Cannot safely perform encryption.");
 define("DECRYPTION_UNSAFE", "Cannot safely perform decryption.");
 define("DECRYPTION_PASSWORD_WRONG", "Something's wrong, please double check your password.");
-define("EMAIL_ERROR", "There was a problem sending your email, please try again.");
 define("SUCCESS_ENCRYPTION", "Your message has been successfully created.");
 define("SUCCESS_DECRYPTION", "Your message has been permanently deleted.");
 define("INTERNAL_ERROR", "An internal error has occured.");
 
 // Log Messages
 define("LOG_ORCHESTRATE_POST", "Successfully stored data to Orchestrate.");
-define("LOG_FLYWHEEL_POST", "Successfully stored data to Flywheel.");
 define("LOG_MESSAGE_CREATED", "Message created.");
 define("LOG_ORCHESTRATE_PURGE", "Successfully deleted message from Orchestrate.");
-define("LOG_FLYWHEEL_PURGE", "Successfully deleted message from Flywheel.");
 define("LOG_MESSAGE_VIEWED", "Message viewed.");
 define("LOG_EMAIL_SENDGRID", "Sent notification email via SendGrid.");
-define("LOG_EMAIL_PHP", "Sent notification email via PHP.");
 define("LOG_EMAIL_NONE", "No notification email sent.");
 define("LOG_UNKNOWN_ERROR", "Unknown error.");

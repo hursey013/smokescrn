@@ -102,7 +102,7 @@ if (!$errors) {
 	$length = 16;
 	$iterations = PASSWORD_ITERATIONS;
 	$salt = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
-	$key = hash_pbkdf2("sha256", $password, $salt . PASSWORD_PEPPER, $iterations, $length);
+	$key = hash_pbkdf2("sha256", $password, $salt, $iterations, $length);
 
 	// Create an array of data to be encrypted
 	$data = serialize(array(
