@@ -18,11 +18,11 @@ $referral = (isset($_GET["id"]) && (!empty($_GET["id"])));
 $logger = new Katzgrau\KLogger\Logger(LOGGING_BASE_DIR, Psr\Log\LogLevel::DEBUG);
 
 // Configure data store
-$client = new andrefelipe\Orchestrate\Client(ORCHESTRATE_API_KEY);	
+$application = new andrefelipe\Orchestrate\Application(ORCHESTRATE_API_KEY);
+$collection = $application->collection(ORCHESTRATE_COLLECTION);
 
 // Configure email settings
 $sendgrid = new SendGrid(SENDGRID_API_KEY);
-$sendemail = new SendGrid\Email();
 
 // Function to return JSON to the requesting page
 function response($msg, $errors, $logger = null){

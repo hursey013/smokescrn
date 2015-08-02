@@ -46,13 +46,12 @@ if(strlen($password) > 16) {
 }	
 
 // Validation: check if message exists
-$item = $client->get(ORCHESTRATE_COLLECTION, $id);
-if ($item->isSuccess()) {
+$item = $collection->item($id);
+if ($item->get()) {
 	$salt = Crypto::hexToBin($item->salt);
 	$data_encrypted = Crypto::hexToBin($item->secret);
 } else {
 	$errors = true;
-	$logger->error('Message ID: ' . $id . ', ' . $item->getStatus());
 	response(VALIDATION_MESSAGE_NOTFOUND, $errors, $logger);
 }
 
@@ -68,6 +67,8 @@ if (!$errors) {
 	try {
 		$data_decrypted = Crypto::Decrypt($data_encrypted, $key);
 	} catch (Ex\InvalidCiphertextException $ex) { // VERY IMPORTANT
+		// Log event
+		$item->event('log')->post(['action' => 'failed']);
 		response(DECRYPTION_PASSWORD_WRONG, true, $logger);
 	} catch (Ex\CryptoTestFailedException $ex) {
 		response(ENCRYPTION_UNSAFE, true, $logger);
@@ -76,9 +77,15 @@ if (!$errors) {
 	}			
 
 	// Delete message
-	$item = $client->purge(ORCHESTRATE_COLLECTION, $id);
-	$logger->info('Message ID: ' . $id . ', ' . LOG_ORCHESTRATE_PURGE);
-
+	$item->delete();	
+	
+	// Log event
+	if ($item->delete()) {
+		$item->event('log')->post(['action' => 'deleted']);
+	} else {
+		response($item->getStatus(), true, $logger);
+	}	
+	
 	$data = unserialize($data_decrypted);
 	
 	// Send email to sender
@@ -93,12 +100,10 @@ if (!$errors) {
 			->setHtml($email_content);
 
 		$sendgrid->send($sendemail);
-		$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_SENDGRID);
 
 	}	
 		
 	// Provide response
-	$logger->info('Message ID: ' . $id . ', ' . LOG_MESSAGE_VIEWED);
 	response($data["message"], false);
 
 } else {

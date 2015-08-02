@@ -126,10 +126,17 @@ if (!$errors) {
 		'expiration_date' => strtotime($expiration_date . ' +1 day')
 	);
 
-	$item = $client->post(ORCHESTRATE_COLLECTION, $array);
-	$id = $item->getKey();
-	$logger->info('Message ID: ' . $id . ', ' . LOG_ORCHESTRATE_POST . ' Expiration date: ' . $expiration_date);
+	$item = $collection->item();
+	$item->post($array);
 
+	// Log event	
+	if ($item->post()) {
+		$item->event('log')->post(['action' => 'created']);
+		$id = $item->getKey();
+	} else {
+		response($item->getStatus(), true, $logger);
+	}
+	
 	// Send email to recipient
 	if(!empty($email_recipient)){
 
@@ -141,6 +148,7 @@ if (!$errors) {
 		}
 		$email_content .= '<p>---</p><p>Thank you,<br />' . SITE_NAME . '</p>';
 
+		$sendemail = new SendGrid\Email();
 		$sendemail->addTo($email_recipient)
 			->setFrom(EMAIL_FROM_ADDRESS)
 			->setSubject(EMAIL_SUBJECT_SENT)
@@ -149,8 +157,6 @@ if (!$errors) {
 		// Check for email errors and provide a response
 		try {
 			$sendgrid->send($sendemail);
-			$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_SENDGRID);
-			$logger->info('Message ID: ' . $id . ', ' . LOG_MESSAGE_CREATED);
 			response($id, false);
 		} catch(\SendGrid\Exception $e) {
 			foreach($e->getErrors() as $er) {
@@ -160,8 +166,6 @@ if (!$errors) {
 
 	} else {
 		// Provide response
-		$logger->info('Message ID: ' . $id . ', ' . LOG_EMAIL_NONE);
-		$logger->info('Message ID: ' . $id . ', ' . LOG_MESSAGE_CREATED);
 		response($id, false);
 	}
 
