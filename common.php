@@ -25,10 +25,7 @@ $collection = $application->collection(ORCHESTRATE_COLLECTION);
 $sendgrid = new SendGrid(SENDGRID_API_KEY);
 
 // Function to return JSON to the requesting page
-function response($msg, $errors, $logger = null){
-	if ($errors){
-		$logger->error($msg);
-	}
+function response($msg, $errors){
 	$response_array = array(
 		'msg' => $msg,
 		'errors' => $errors

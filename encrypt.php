@@ -9,7 +9,7 @@ $errors = false;
 // Validation: check if it's a post request
 if($_SERVER['REQUEST_METHOD'] != "POST") {
 	$errors = true;
-	response(VALIDATION_POST, $errors, $logger);
+	response(VALIDATION_POST, $errors);
 }
 
 // Validation: check if it's an ajax request
@@ -17,7 +17,7 @@ if((!isset($_SERVER['HTTP_X_REQUESTED_WITH']))
    AND (strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest')
   ){
 	$errors = true;
-	response(VALIDATION_AJAX, $errors, $logger);
+	response(VALIDATION_AJAX, $errors);
 } 
 
 // Validation: check if any of the fields aren't set
@@ -30,7 +30,7 @@ if((!isset($_POST['message']))
    || (!isset($_POST['expiration_date']))
   ){
 	$errors = true;
-	response(VALIDATION_REQUIRED_FIELDS, $errors, $logger);
+	response(VALIDATION_REQUIRED_FIELDS, $errors);
 } else {
 	$message = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
 	$password = $_POST['encrypt_password'];
@@ -48,25 +48,25 @@ if((empty($message))
    || (empty($expiration_date))
   ){
 	$errors = true;
-	response(VALIDATION_REQUIRED_FIELDS, $errors, $logger);
+	response(VALIDATION_REQUIRED_FIELDS, $errors);
 }					   
 
 // Validation: check if textarea is too long
 if(strlen($message) > 1000) {
 	$errors = true;
-	response(VALIDATION_TEXTAREA_LENGTH, $errors, $logger);
+	response(VALIDATION_TEXTAREA_LENGTH, $errors);
 }
 
 // Validation: check if passwords is long enough
 if(strlen($password) < 8) {
 	$errors = true;
-	response(VALIDATION_PASSWORD_LENGTH, $errors, $logger);
+	response(VALIDATION_PASSWORD_LENGTH, $errors);
 }
 
 // Validation: check if passwords match
 if($password !== $password_confirm) {
 	$errors = true;
-	response(VALIDATION_PASSWORD_MISMATCH, $errors, $logger);
+	response(VALIDATION_PASSWORD_MISMATCH, $errors);
 }		
 
 // Validation: check for valid email format
@@ -74,13 +74,13 @@ if((!empty($email_recipient)) && (!filter_var($email_recipient, FILTER_VALIDATE_
    || (!empty($email_sender)) && (!filter_var($email_sender, FILTER_VALIDATE_EMAIL))
   ){
 	$errors = true;
-	response(VALIDATION_EMAIL_INVALID, $errors, $logger);
+	response(VALIDATION_EMAIL_INVALID, $errors);
 }
 
 // Validation: check if password hint is too long
 if(strlen($email_password_hint) > 200) {
 	$errors = true;
-	response(VALIDATION_PASSWORD_HINT_LENGTH, $errors, $logger);
+	response(VALIDATION_PASSWORD_HINT_LENGTH, $errors);
 }
 
 // Validation: check for valid expiration date format
@@ -88,11 +88,11 @@ $date = DateTime::createFromFormat('m/d/Y', $expiration_date);
 $date_errors = DateTime::getLastErrors();
 if ($date_errors['warning_count'] + $date_errors['error_count'] > 0) {
 	$errors = true;
-	response(VALIDATION_DATE_INVALID, $errors, $logger);
+	response(VALIDATION_DATE_INVALID, $errors);
 }
 if (strtotime($expiration_date) > strtotime("today +30 days")){
 	$errors = true;
-	response(VALIDATION_DATE_INVALID, $errors, $logger);
+	response(VALIDATION_DATE_INVALID, $errors);
 }
 
 // If all of the above validation checks pass, continue on
@@ -114,9 +114,9 @@ if (!$errors) {
 	try {
 		$data_encrypted = Crypto::Encrypt($data, $key);
 	} catch (Ex\CryptoTestFailedException $ex) {
-		response(ENCRYPTION_UNSAFE, true, $logger);
+		response(ENCRYPTION_UNSAFE, true);
 	} catch (Ex\CannotPerformOperationException $ex) {
-		response(DECRYPTION_UNSAFE, true, $logger);
+		response(DECRYPTION_UNSAFE, true);
 	}		
 
 	// Store the encrypted data
@@ -134,7 +134,8 @@ if (!$errors) {
 		$item->event('log')->post(['action' => 'created']);
 		$id = $item->getKey();
 	} else {
-		response($item->getStatus(), true, $logger);
+		$logger->error($item->getStatus());
+		response($item->getStatus(), true);
 	}
 	
 	// Send email to recipient
@@ -160,7 +161,8 @@ if (!$errors) {
 			response($id, false);
 		} catch(\SendGrid\Exception $e) {
 			foreach($e->getErrors() as $er) {
-				response($er, true, $logger);
+				$logger->error($er);
+				response($er, true);
 			}
 		}
 
@@ -171,6 +173,5 @@ if (!$errors) {
 
 } else {
 	// Unknown error
-	$logger->alert(LOG_UNKNOWN_ERROR);
 	die();
 }

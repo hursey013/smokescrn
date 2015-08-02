@@ -9,7 +9,7 @@ $errors = false;
 // Validation: check if it's a post request
 if($_SERVER['REQUEST_METHOD'] != "POST") {
 	$errors = true;
-	response(VALIDATION_POST, $errors, $logger);
+	response(VALIDATION_POST, $errors);
 }
 
 // Validation: check if it's an ajax request
@@ -17,7 +17,7 @@ if((!isset($_SERVER['HTTP_X_REQUESTED_WITH']))
    AND (strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest')
   ){
 	$errors = true;
-	response(VALIDATION_AJAX, $errors, $logger);
+	response(VALIDATION_AJAX, $errors);
 } 
 
 // Validation: check if any of the fields aren't set
@@ -25,7 +25,7 @@ if((!isset($_POST['id']))
    || (!isset($_POST['decrypt_password']))
   ){
 	$errors = true;
-	response(VALIDATION_REQUIRED_FIELDS, $errors, $logger);
+	response(VALIDATION_REQUIRED_FIELDS, $errors);
 } else {
 	$id = $_POST['id'];
 	$password = $_POST['decrypt_password'];
@@ -36,13 +36,13 @@ if((empty($id))
    || (empty($password))
   ){
 	$errors = true;
-	response(VALIDATION_REQUIRED_FIELDS, $errors, $logger);
+	response(VALIDATION_REQUIRED_FIELDS, $errors);
 }
 
 // Validation: check if message ID is too long
 if(strlen($password) > 16) {
 	$errors = true;
-	response(VALIDATION_MESSAGE_LENGTH, $errors, $logger);
+	response(VALIDATION_MESSAGE_LENGTH, $errors);
 }	
 
 // Validation: check if message exists
@@ -52,7 +52,7 @@ if ($item->get()) {
 	$data_encrypted = Crypto::hexToBin($item->secret);
 } else {
 	$errors = true;
-	response(VALIDATION_MESSAGE_NOTFOUND, $errors, $logger);
+	response(VALIDATION_MESSAGE_NOTFOUND, $errors);
 }
 
 // If all of the above validation checks pass, continue on
@@ -69,11 +69,11 @@ if (!$errors) {
 	} catch (Ex\InvalidCiphertextException $ex) { // VERY IMPORTANT
 		// Log event
 		$item->event('log')->post(['action' => 'failed']);
-		response(DECRYPTION_PASSWORD_WRONG, true, $logger);
+		response(DECRYPTION_PASSWORD_WRONG, true);
 	} catch (Ex\CryptoTestFailedException $ex) {
-		response(ENCRYPTION_UNSAFE, true, $logger);
+		response(ENCRYPTION_UNSAFE, true);
 	} catch (Ex\CannotPerformOperationException $ex) {
-		response(DECRYPTION_UNSAFE, true, $logger);
+		response(DECRYPTION_UNSAFE, true);
 	}			
 
 	// Delete message
@@ -83,7 +83,8 @@ if (!$errors) {
 	if ($item->delete()) {
 		$item->event('log')->post(['action' => 'deleted']);
 	} else {
-		response($item->getStatus(), true, $logger);
+		$logger->error($item->getStatus());
+		response($item->getStatus(), true);
 	}	
 	
 	$data = unserialize($data_decrypted);
@@ -98,9 +99,15 @@ if (!$errors) {
 			->setFrom(EMAIL_FROM_ADDRESS)
 			->setSubject(EMAIL_SUBJECT_VIEWED)
 			->setHtml($email_content);
-
-		$sendgrid->send($sendemail);
-
+		
+		try {
+			$sendgrid->send($sendemail);
+		} catch(\SendGrid\Exception $e) {
+			foreach($e->getErrors() as $er) {
+				$logger->error($er);
+			}
+		}		
+		
 	}	
 		
 	// Provide response
@@ -108,6 +115,5 @@ if (!$errors) {
 
 } else {
 	// Unknown error
-	$logger->alert(LOG_UNKNOWN_ERROR);
 	die();
 }

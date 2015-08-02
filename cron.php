@@ -1,7 +1,7 @@
 <?php
 require_once 'common.php';
 
-$logger->debug('Cron job initiated.');
+$logger->info('Cron job initiated.');
 
 // Delete expired messages
 $collection->search('expiration_date:[* TO ' . time() .']');
@@ -13,6 +13,4 @@ foreach ($collection as $item) {
 	} else {
 		$logger->error($item->getStatus());
 	}	
-}	
-
-$logger->debug('Cron job finished.');
+}
