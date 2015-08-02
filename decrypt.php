@@ -95,11 +95,14 @@ if (!$errors) {
 		$email_content = '<p>' . EMAIL_BODY_VIEWED . '</p>';
 		$email_content .= '<p>---</p><p>Thank you,<br />' . SITE_NAME . '</p>';
 
+		$sendemail = new SendGrid\Email();
 		$sendemail->addTo($data["email_sender"])
 			->setFrom(EMAIL_FROM_ADDRESS)
 			->setSubject(EMAIL_SUBJECT_VIEWED)
 			->setHtml($email_content);
-		
+
+		$sendgrid->send($sendemail);
+
 		try {
 			$sendgrid->send($sendemail);
 		} catch(\SendGrid\Exception $e) {
@@ -115,5 +118,6 @@ if (!$errors) {
 
 } else {
 	// Unknown error
+	$logger->error(LOG_UNKNOWN_ERROR);
 	die();
 }
