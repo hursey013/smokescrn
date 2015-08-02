@@ -40,7 +40,7 @@ if((empty($id))
 }
 
 // Validation: check if message ID is too long
-if(strlen($password) > 16) {
+if(strlen($id) > 16) {
 	$errors = true;
 	response(VALIDATION_MESSAGE_LENGTH, $errors);
 }	
