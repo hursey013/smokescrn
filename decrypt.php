@@ -101,8 +101,6 @@ if (!$errors) {
 			->setSubject(EMAIL_SUBJECT_VIEWED)
 			->setHtml($email_content);
 
-		$sendgrid->send($sendemail);
-
 		try {
 			$sendgrid->send($sendemail);
 		} catch(\SendGrid\Exception $e) {
