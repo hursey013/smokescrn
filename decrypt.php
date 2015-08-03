@@ -47,10 +47,7 @@ if(strlen($id) > 16) {
 
 // Validation: check if message exists
 $item = $collection->item($id);
-if ($item->get()) {
-	$salt = Crypto::hexToBin($item->salt);
-	$data_encrypted = Crypto::hexToBin($item->secret);
-} else {
+if (!$item->get()) {
 	$errors = true;
 	response(VALIDATION_MESSAGE_NOTFOUND, $errors);
 }
@@ -58,7 +55,7 @@ if ($item->get()) {
 // Validation: make sure this isn't a brute force attempt
 $now = strtotime("now") * 1000;
 $past = strtotime("-5 min") * 1000;
-$events = $collection->events('0ba5683e9e208379', 'log');
+$events = $collection->events($id, 'log');
 $events->search('value.action:failed AND @path.timestamp:[' . $past .' TO ' . $now .']', '@path.timestamp:desc');
 $fail_total = $events->getTotalCount();
 $fail_array = $events->toArray();
@@ -72,6 +69,9 @@ if (($fail_total > 5) && ($now < $fail_good)) {
 // If all of the above validation checks pass, continue on
 if (!$errors) {
 
+	$salt = Crypto::hexToBin($item->salt);
+	$data_encrypted = Crypto::hexToBin($item->secret);	
+	
 	// Create decryption key
 	$length = 16;
 	$iterations = PASSWORD_ITERATIONS;
