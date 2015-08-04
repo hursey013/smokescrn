@@ -52,16 +52,23 @@ if (!$item->get()) {
 	response(VALIDATION_MESSAGE_NOTFOUND, $errors);
 }
 
-// Validation: make sure this isn't a brute force attempt
+// Validation: check if the message is disabled
 $now = strtotime("now") * 1000;
+$past = strtotime("-10 min") * 1000;
+$events = $item->events('log');
+$events->search('value.action:disabled AND @path.timestamp:[' . $past .' TO ' . $now .']');
+$disabled = $events->getTotalCount();
+if ($disabled > 0) {
+	$errors = true;
+	response(VALIDATION_TOO_MANY_ATTEMPTS, $errors);
+}
+
+// Validation: check if this is a brute force attempt
 $past = strtotime("-5 min") * 1000;
-$events = $collection->events($id, 'log');
-$events->search('value.action:failed AND @path.timestamp:[' . $past .' TO ' . $now .']', '@path.timestamp:desc');
+$events->search('value.action:failed AND @path.timestamp:[' . $past .' TO ' . $now .']');
 $fail_total = $events->getTotalCount();
-$fail_array = $events->toArray();
-$fail_last = $fail_array["results"][0]["path"]["timestamp"];
-$fail_good = strtotime("+5 min", ($fail_last/1000)) * 1000;		  
-if (($fail_total >= 3) && ($now < $fail_good)) {
+if ($fail_total >= 3) {
+	$item->event('log')->post(['action' => 'disabled']);
 	$errors = true;
 	response(VALIDATION_TOO_MANY_ATTEMPTS, $errors);
 }
