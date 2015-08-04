@@ -60,8 +60,8 @@ $events->search('value.action:failed AND @path.timestamp:[' . $past .' TO ' . $n
 $fail_total = $events->getTotalCount();
 $fail_array = $events->toArray();
 $fail_last = $fail_array["results"][0]["path"]["timestamp"];
-$fail_good = strtotime("+10 min", ($fail_last/1000)) * 1000;		  
-if (($fail_total > 5) && ($now < $fail_good)) {
+$fail_good = strtotime("+5 min", ($fail_last/1000)) * 1000;		  
+if (($fail_total >= 3) && ($now < $fail_good)) {
 	$errors = true;
 	response(VALIDATION_TOO_MANY_ATTEMPTS, $errors);
 }
