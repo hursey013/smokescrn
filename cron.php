@@ -14,3 +14,14 @@ foreach ($collection as $item) {
 		$logger->error($item->getStatus());
 	}	
 }
+
+// Update stats in Numerous
+if(defined('NUMEROUS_API_KEY')) {
+	require_once 'numerous.php';
+	$events = $collection->events();
+	$events->setType('log');
+	$events->search('value.action:created', null, 'value.action:top_values');
+	$count = $events->getTotalCount();
+	$n = new GX\Numerous(NUMEROUS_API_KEY);
+	$n->createEvent(NUMEROUS_METRIC_ID, $count);
+}
