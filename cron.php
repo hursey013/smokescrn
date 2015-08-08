@@ -17,7 +17,7 @@ foreach ($collection as $item) {
 
 // Update stats in Numerous
 if(defined('NUMEROUS_API_KEY')) {
-	require_once 'numerous.php';
+	require_once 'library/numerous.php';
 	$events = $collection->events();
 	$events->setType('log');
 	$events->search('value.action:created', null, 'value.action:top_values');
