@@ -16,6 +16,10 @@ body {background-color: #c7c6c6;}
 .link-black:hover {color: #000;}
 a[data-toggle="popover"] {text-decoration: none !important;}
 
+.datepicker table tr td.active.active {
+	background-color: #be1522 !important;
+	border-color: #be1522  !important;
+}
 /* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 480px) {
 	.home #main {background: url("../images/ssshh.png") no-repeat center -20px;}

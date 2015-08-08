@@ -15,9 +15,15 @@ When you enter your information into smokescrn we use the password you choose to
 - [Orchestrate.io](http://orchestrate.io) account
 - [SendGrid](http://sendgrid.com) account
 
-###### All of the following dependencies can be installed using composer:
+###### All of the following PHP dependencies can be installed using composer:
 
 - [defuse/php-encryption](https://github.com/defuse/php-encryption)
 - [andrefelipe/orchestrate-php](https://github.com/andrefelipe/orchestrate-php)
 - [sendgrid/sendgrid](https://github.com/sendgrid/sendgrid-php)
 - [katzgrau/klogger](https://github.com/katzgrau/klogger)
+
+###### jQuery:
+
+- [hakimel/Ladda](https://github.com/hakimel/Ladda)
+- [eternicode/bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker)
+- [1000hz/bootstrap-validator](https://github.com/1000hz/bootstrap-validator)
