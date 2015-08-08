@@ -11,11 +11,11 @@ When you enter your information into smokescrn we use the password you choose to
 
 ##### Requirements:
 
-- PHP 5.4 or newer
+- PHP 5.5 or newer
 - [Orchestrate.io](http://orchestrate.io) account
 - [SendGrid](http://sendgrid.com) account
 
-###### All of the following PHP dependencies can be installed using composer:
+###### PHP:
 
 - [defuse/php-encryption](https://github.com/defuse/php-encryption)
 - [andrefelipe/orchestrate-php](https://github.com/andrefelipe/orchestrate-php)
