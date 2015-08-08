@@ -23,6 +23,10 @@ define("SENDGRID_API_KEY", "INSERT YOUR API");
 define("ORCHESTRATE_API_KEY", "INSERT YOUR API");
 define("ORCHESTRATE_COLLECTION", "secrets");
 
+// Numerous API Settings
+define("NUMEROUS_API_KEY", "INSERT YOUR API");
+define("NUMEROUS_METRIC_ID", "12345");
+
 // User Notifications
 define("VALIDATION_POST", "Form data not received as a POST request.");
 define("VALIDATION_AJAX", "Form data not received as an AJAX request.");
@@ -35,18 +39,10 @@ define("VALIDATION_EMAIL_INVALID", "Please provide a valid email address.");
 define("VALIDATION_DATE_INVALID", "Please provide a valid expiration date.");
 define("VALIDATION_MESSAGE_LENGTH", "Your message ID is too long.");
 define("VALIDATION_MESSAGE_NOTFOUND", "The message ID you entered has expired or cannot be found.");
+define("VALIDATION_TOO_MANY_ATTEMPTS", "This message has been temporarily locked.");
 define("ENCRYPTION_UNSAFE", "Cannot safely perform encryption.");
 define("DECRYPTION_UNSAFE", "Cannot safely perform decryption.");
 define("DECRYPTION_PASSWORD_WRONG", "Something's wrong, please double check your password.");
 define("SUCCESS_ENCRYPTION", "Your message has been successfully created.");
 define("SUCCESS_DECRYPTION", "Your message has been permanently deleted.");
 define("INTERNAL_ERROR", "An internal error has occured.");
-
-// Log Messages
-define("LOG_ORCHESTRATE_POST", "Successfully stored data to Orchestrate.");
-define("LOG_MESSAGE_CREATED", "Message created.");
-define("LOG_ORCHESTRATE_PURGE", "Successfully deleted message from Orchestrate.");
-define("LOG_MESSAGE_VIEWED", "Message viewed.");
-define("LOG_EMAIL_SENDGRID", "Sent notification email via SendGrid.");
-define("LOG_EMAIL_NONE", "No notification email sent.");
-define("LOG_UNKNOWN_ERROR", "Unknown error.");
