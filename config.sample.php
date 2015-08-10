@@ -24,8 +24,8 @@ define("ORCHESTRATE_API_KEY", "INSERT YOUR API");
 define("ORCHESTRATE_COLLECTION", "secrets");
 
 // Numerous API Settings
-define("NUMEROUS_API_KEY", "INSERT YOUR API");
-define("NUMEROUS_METRIC_ID", "12345");
+//define("NUMEROUS_API_KEY", "INSERT YOUR API");
+//define("NUMEROUS_METRIC_ID", "12345");
 
 // User Notifications
 define("VALIDATION_POST", "Form data not received as a POST request.");
