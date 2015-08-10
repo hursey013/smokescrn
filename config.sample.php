@@ -27,6 +27,9 @@ define("ORCHESTRATE_COLLECTION", "secrets");
 //define("NUMEROUS_API_KEY", "INSERT YOUR API");
 //define("NUMEROUS_METRIC_ID", "12345");
 
+// Google Analytics API Settings
+//define("GOOGLE_ANALYTICS_KEY", "INSERT YOUR KEY");
+
 // User Notifications
 define("VALIDATION_POST", "Form data not received as a POST request.");
 define("VALIDATION_AJAX", "Form data not received as an AJAX request.");
