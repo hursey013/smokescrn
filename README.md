@@ -1,5 +1,5 @@
 ## smokescrn
-[https://smokescrn.com](https://smokescrn.com)
+This repository is what's behind [https://smokescrn.com](https://smokescrn.com)
 
 ##### So what's this thing for?
 
@@ -15,9 +15,6 @@ When you enter your information into smokescrn we use the password you choose to
 - [Orchestrate.io](http://orchestrate.io) account
 - [SendGrid](http://sendgrid.com) account
 
-##### Installation
-Clone the entire project to your server and use [composer](https://getcomposer.org) to download the PHP dependencies.  All of the settings for the script can be found in config.sample.php - you will need to update this with your own API keys for Orchestrate.io and SendGrid and then rename it to config.php.  You'll also need to edit LOGGING_BASE_DIR to point to a writeable log directory (not publically accessible).  Lastly, set up a reoccuring cron job to run the cron.php file - this is responsible for deleting expired messages.  I set it to run every night at midnight.
-
 ###### PHP:
 
 - [defuse/php-encryption](https://github.com/defuse/php-encryption)
@@ -30,3 +27,6 @@ Clone the entire project to your server and use [composer](https://getcomposer.o
 - [hakimel/Ladda](https://github.com/hakimel/Ladda)
 - [eternicode/bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker)
 - [1000hz/bootstrap-validator](https://github.com/1000hz/bootstrap-validator)
+
+##### Installation:
+Clone the entire project to your server and use [composer](https://getcomposer.org) to download the PHP dependencies.  All of the settings for the script can be found in config.sample.php - you will need to update this with your own API keys for Orchestrate.io and SendGrid and then rename it to config.php.  You'll also need to edit LOGGING_BASE_DIR to point to a writeable log directory (not publically accessible).  Lastly, set up a reoccuring cron job to run the cron.php file - this is responsible for deleting expired messages.  I set it to run every night at midnight.
