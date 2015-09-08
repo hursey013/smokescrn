@@ -45,7 +45,7 @@
 	
 	<div class="container">
 		<div class="row">
-			<div id="main" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+			<div id="main" class="col-md-12">
 				<div class="row">
 					<div id="brand" class="col-md-8">
 						<h1 id="logo"><a class="link-black" href="<?php echo SITE_URL; ?>"><span style="font-weight:300;">&lt;smokescrn&gt;</span></a></h1>

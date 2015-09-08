@@ -173,5 +173,6 @@ if (!$errors) {
 
 } else {
 	// Unknown error
+	$logger->error(LOG_UNKNOWN_ERROR);
 	die();
 }

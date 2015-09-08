@@ -20,6 +20,12 @@ a[data-toggle="popover"] {text-decoration: none !important;}
 	background-color: #be1522 !important;
 	border-color: #be1522  !important;
 }
+
+/* Customize container */
+@media (min-width: 768px) {
+	.container {max-width: 585px;}
+}
+
 /* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 480px) {
 	.home #main {background: url("../images/ssshh.png") no-repeat center -20px;}
