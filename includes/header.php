@@ -48,7 +48,7 @@
 			<div id="main" class="col-md-12">
 				<div class="row">
 					<div id="brand" class="col-md-8">
-						<h1 id="logo"><a class="link-black" href="<?php echo SITE_URL; ?>"><span style="font-weight:300;">&lt;smokescrn&gt;</span></a></h1>
+						<h1 id="logo"><a class="link-black" href="<?php echo SITE_URL; ?>"><span style="font-weight:300;">&lt;<?php echo SITE_NAME; ?>&gt;</span></a></h1>
 						<h4 id="tagline" style="font-weight:300;"><?php echo SITE_TAGLINE; ?></h4>
 					</div>
 				</div>

@@ -1,34 +1,82 @@
-body {background-color: #c7c6c6;}
-.home #main {background: url("../images/ssshh.png") no-repeat right -20px;}
-#brand {padding-top: 40px;}
+body {
+	background-color: #c7c6c6;
+}
+
+.home #main {
+	background: url("../images/ssshh.png") no-repeat right -20px;
+}
+
+#brand {
+	padding-top: 40px;
+}
+
 #logo {
 	font-family: 'Roboto', sans-serif;
 	background: url('../images/logo.png') no-repeat -15px top;
 	padding-top: 50px;
 	margin-top: 0;
 }
-#tagline {font-family: 'Roboto', sans-serif;}
-.tab-content form, #results {margin-top: 20px;}
-.tab-content .col-sm-6 input {width: 100%;}
-.tab-content .col-sm-6 .help-block {margin-bottom: 0;}
-.tab-content .btn {margin-top: 30px;}
-.link-black {color: #333; text-decoration: none !important;}
-.link-black:hover {color: #000;}
-a[data-toggle="popover"] {text-decoration: none !important;}
+
+#tagline {
+	font-family: 'Roboto', sans-serif;
+}
+
+.tab-content form,
+#results {
+	margin-top: 20px;
+}
+
+.tab-content .col-sm-6 input {
+	width: 100%;
+}
+
+.tab-content .col-sm-6 .help-block {
+	margin-bottom: 0;
+}
+
+.tab-content .btn {
+	margin-top: 30px;
+}
+
+.link-black {
+	color: #333;
+	text-decoration: none !important;
+}
+
+.link-black:hover {
+	color: #000;
+}
+
+a[data-toggle="popover"] {
+	text-decoration: none !important;
+}
 
 .datepicker table tr td.active.active {
 	background-color: #be1522 !important;
-	border-color: #be1522  !important;
+	border-color: #be1522 !important;
 }
+
 
 /* Customize container */
+
 @media (min-width: 768px) {
-	.container {max-width: 585px;}
+	.container {
+		max-width: 585px;
+	}
 }
 
-/* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 480px) {
-	.home #main {background: url("../images/ssshh.png") no-repeat center -20px;}
-	.home #brand {padding-top: 300px; text-align: center;}
-	.home #logo {background: none;}	
+
+/* Extra Small Devices, Phones */
+
+@media only screen and (max-width: 480px) {
+	.home #main {
+		background: url("../images/ssshh.png") no-repeat center -20px;
+	}
+	.home #brand {
+		padding-top: 300px;
+		text-align: center;
+	}
+	.home #logo {
+		background: none;
+	}
 }
