@@ -2,6 +2,7 @@
 Thumbs.db
 /vendor
 config.php
+.htaccess
 *.txt
 /data
 /logs
