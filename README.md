@@ -1,5 +1,5 @@
 ## smokescrn
-The repository behind [https://smokescrn.com](https://smokescrn.com)
+The repository behind [https://smokescrn.bhurst.me](https://smokescrn.bhurst.me)
 
 ##### So what's this thing for?
 
