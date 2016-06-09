@@ -1,7 +1,7 @@
 {
     "require": {
-        "defuse/php-encryption": "dev-master",
-		"sendgrid/sendgrid": "~3.2",
+        "defuse/php-encryption": "1.2.1",
+	"sendgrid/sendgrid": "~3.2",
         "andrefelipe/orchestrate-php": "0.14.*",
         "katzgrau/klogger": "dev-master"
     }
