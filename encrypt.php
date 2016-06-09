@@ -98,12 +98,6 @@ if (strtotime($expiration_date) > strtotime("today +30 days")){
 // If all of the above validation checks pass, continue on
 if (!$errors) {
 
-	// Create encryption key
-	$length = 16;
-	$iterations = PASSWORD_ITERATIONS;
-	$salt = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
-	$key = hash_pbkdf2("sha256", $password, $salt, $iterations, $length);
-
 	// Create an array of data to be encrypted
 	$data = serialize(array(
 		"message" => $message,
@@ -112,17 +106,14 @@ if (!$errors) {
 
 	// Encrypt data, reference: https://github.com/defuse/php-encryption/
 	try {
-		$data_encrypted = Crypto::Encrypt($data, $key);
-	} catch (Ex\CryptoTestFailedException $ex) {
+		$data_encrypted = Crypto::encryptWithPassword($data, $password);
+	} catch (Ex\EnvironmentIsBrokenException $ex) {
 		response(ENCRYPTION_UNSAFE, true);
-	} catch (Ex\CannotPerformOperationException $ex) {
-		response(DECRYPTION_UNSAFE, true);
-	}		
-
+	}
+	
 	// Store the encrypted data
 	$array = array(
-		'salt' => Crypto::binToHex($salt),
-		'secret' => Crypto::binToHex($data_encrypted),
+		'secret' => bin2hex($data_encrypted),
 		'expiration_date' => strtotime($expiration_date . ' +1 day')
 	);
 

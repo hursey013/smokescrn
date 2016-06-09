@@ -76,27 +76,19 @@ if ($fail_total >= 3) {
 // If all of the above validation checks pass, continue on
 if (!$errors) {
 
-	$salt = Crypto::hexToBin($item->salt);
-	$data_encrypted = Crypto::hexToBin($item->secret);	
-	
-	// Create decryption key
-	$length = 16;
-	$iterations = PASSWORD_ITERATIONS;
-	$key = hash_pbkdf2("sha256", $password, $salt, $iterations, $length);	
+	$data_encrypted = hex2bin($item->secret);	
 
 	// Decrypt data, reference: https://github.com/defuse/php-encryption/
 	try {
-		$data_decrypted = Crypto::Decrypt($data_encrypted, $key);
-	} catch (Ex\InvalidCiphertextException $ex) { // VERY IMPORTANT
+		$data_decrypted = Crypto::decryptWithPassword($data_encrypted, $password);
+	} catch (Ex\WrongKeyOrModifiedCiphertextException $ex) { // VERY IMPORTANT
 		// Log event
 		$item->event('log')->post(['action' => 'failed']);
 		response(DECRYPTION_PASSWORD_WRONG, true);
-	} catch (Ex\CryptoTestFailedException $ex) {
+	} catch (Ex\EnvironmentIsBrokenException $ex) {
 		response(ENCRYPTION_UNSAFE, true);
-	} catch (Ex\CannotPerformOperationException $ex) {
-		response(DECRYPTION_UNSAFE, true);
-	}			
-
+	}
+	
 	// Delete message
 	$item->delete();	
 	
