@@ -118,10 +118,8 @@ if (!$errors) {
 	);
 
 	$item = $collection->item();
-	$item->post($array);
-
-	// Log event	
-	if ($item->post()) {
+	
+	if ($item->post($array)) {
 		$item->event('log')->post(['action' => 'created']);
 		$id = $item->getKey();
 	} else {

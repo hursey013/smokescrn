@@ -40,12 +40,12 @@ $(function() {
 
 	// Connect to encrypt.php and return response
 	$('#form_encrypt').validator().on('submit', function(e) {
+		
+		// Initiate Ladda loading animation
+		var l = $("button", this).ladda();
+		l.ladda('start');
+		
 		if (!e.isDefaultPrevented()) {
-
-			// Initiate Ladda loading animation
-			var l = $("button", this).ladda();
-			l.ladda('start');
-			
 			var formData = $(this).serialize();
 			$.ajax({
 				type: "POST",
@@ -70,18 +70,18 @@ $(function() {
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			});
-			e.preventDefault();
 		}
+		return false;
 	});
 
 	// Connect to decrypt.php and return response
 	$('#form_decrypt').validator().on('submit', function(e) {
+			
+		// Initiate Ladda loading animation
+		var l = $("button", this).ladda();
+		l.ladda('start');			
+		
 		if (!e.isDefaultPrevented()) {
-			
-			// Initiate Ladda loading animation
-			var l = $("button", this).ladda();
-			l.ladda('start');			
-			
 			var formData = $(this).serialize();
 			$.ajax({
 				type: "POST",
@@ -106,8 +106,8 @@ $(function() {
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			});
-			e.preventDefault();
 		}
+		return false;
 	});
 
 });
