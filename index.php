@@ -9,7 +9,7 @@
 	<!--ENCRYPT-->
 	<div role="tabpanel" class="tab-pane <?php if(!$referral){echo 'active';}?>" id="encrypt">
 		<form id="form_encrypt" data-disable="false">
-			<label for="message">Your secret message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Messages are securely transferred, stored using AES-128 encryption, and permanently deleted once viewed."></a></label> 
+			<label for="message">Your secret message: <a href="#" class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="Messages are securely transferred, stored using AES-256 encryption, and permanently deleted once viewed."></a></label> 
 			<div class="row">
 				<div class="col-sm-6" id="expandContainer">
 					<div class="form-group">

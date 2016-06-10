@@ -1,5 +1,6 @@
-<?php require_once 'common.php'; ?>
-<?php require_once 'includes/header.php'; ?>
+
+<?php require_once '../common.php'; ?>
+<?php require_once '../includes/header.php'; ?>
 
 <div class="page-header" style="margin-top:20px">
 	<h2>About</h2>
@@ -22,7 +23,7 @@ If that doesn't make you feel any better, the code running this website is open 
 </p>
 <p><strong>I'm a nerd.  Technical details, please.</strong></p>
 <p>
-<?php echo SITE_NAME; ?> is a simple PHP application built upon several open source libraries and APIs.  An encryption key is generated using the provided password and is hashed using many rounds of SHA-256 (pbkdf2).  This key is used in conjunction with the excellent <a href="https://github.com/defuse/php-encryption" target="_blank">defuse/php-encryption</a> library to encrypt the content of the message with AES-128 in CBC mode.  We also use <a href="https://orchestrate.io/" target="_blank">Orchestrate.io</a> to store the data and <a href="https://sendgrid.com/" target="_blank">SendGrid</a> for email notifications.
+<?php echo SITE_NAME; ?> is a simple PHP application built upon several open source libraries and APIs.  We use the <a href="https://github.com/defuse/php-encryption" target="_blank">defuse/php-encryption</a> library for deriving a key from the password you select, and also for encrypting the contents of your message.  We also use <a href="https://orchestrate.io/" target="_blank">Orchestrate.io</a> to store the data and <a href="https://sendgrid.com/" target="_blank">SendGrid</a> for email notifications.
 </p>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

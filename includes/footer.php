@@ -1,9 +1,7 @@
 
 				<hr />
 
-				<!--COPYRIGHT-->
-				<p class="small text-center">&copy; <?php echo date('Y'); ?> <a href="<?php echo SITE_URL; ?>/index.php"><?php echo SITE_NAME; ?></a>. All rights reserved.</p>
-<p class="small text-center"><a href="<?php echo SITE_URL; ?>/static/about.php">About</a> | <a href="<?php echo SITE_URL; ?>/static/privacy.php">Privacy</a> | <a href="<?php echo SITE_URL; ?>/static/terms.php">Terms</a> | <a href="mailto:inquiries@smokescrn.com">Contact</a> | <a href="https://github.com/hursey013/smokescrn">Github</a></p>
+				<p class="small text-center"><a href="<?php echo SITE_URL; ?>/static/about.php">About</a> | <a href="<?php echo SITE_URL; ?>/static/privacy.php">Privacy</a> | <a href="https://github.com/hursey013/smokescrn">Github</a></p>
 
 			</div>
 		</div>
