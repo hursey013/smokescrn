@@ -3,7 +3,6 @@
 define("SITE_NAME", "SuperSecret");
 define("SITE_TAGLINE", "Self-destructing encrypted messages");
 define("SITE_URL", "https://secretwebsite.com"); // No trailing slash
-define("PASSWORD_ITERATIONS", "100000");
 define("DEBUG_MODE", false);
 
 // Email Settings
@@ -22,10 +21,6 @@ define("SENDGRID_API_KEY", "INSERT YOUR API");
 // Orchestrate.io API Settings
 define("ORCHESTRATE_API_KEY", "INSERT YOUR API");
 define("ORCHESTRATE_COLLECTION", "secrets");
-
-// Numerous API Settings
-//define("NUMEROUS_API_KEY", "INSERT YOUR API");
-//define("NUMEROUS_METRIC_ID", "12345");
 
 // Google Analytics API Settings
 //define("GOOGLE_ANALYTICS_KEY", "INSERT YOUR KEY");
