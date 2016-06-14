@@ -13,8 +13,8 @@
 			<div class="row">
 				<div class="col-sm-6" id="expandContainer">
 					<div class="form-group">
-						<textarea class="form-control" id="message" name="message" rows="3" maxlength="1000" required></textarea>
-						<span class="help-block"><span id="chars" style="font-weight:bold;">1000</span> characters remaining. <span class="hidden-xs">[<a href="#" id="expand">Expand</a>]</span></span>
+						<textarea class="form-control" id="message" name="message" rows="3" maxlength="5000" required></textarea>
+						<span class="help-block"><span id="chars" style="font-weight:bold;">5000</span> characters remaining. <span class="hidden-xs">[<a href="#" id="expand">Expand</a>]</span></span>
 					</div>
 				</div>
 			</div>

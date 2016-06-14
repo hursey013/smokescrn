@@ -52,7 +52,7 @@ if((empty($message))
 }					   
 
 // Validation: check if textarea is too long
-if(strlen($message) > 1000) {
+if(strlen($message) > 5000) {
 	$errors = true;
 	response(VALIDATION_TEXTAREA_LENGTH, $errors);
 }

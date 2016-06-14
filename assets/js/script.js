@@ -18,7 +18,7 @@ $(function() {
 	});
 
 	// Message character counter
-	var maxLength = 1000;
+	var maxLength = 5000;
 	$('textarea').keyup(function() {
 		var length = $(this).val().length;
 		length = maxLength-length;
