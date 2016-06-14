@@ -19,11 +19,6 @@
 	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	<meta property="og:title" content="<?php echo SITE_TAGLINE; ?>" />
-	<meta property="og:site_name" content="<?php echo SITE_NAME; ?>"/>
-	<meta property="og:description" content="I'll cut right to it. I built this app for my own selfish reasons. Every time I share a password, account number, or personal information with someone, I cringe the moment I push the send button. I know my message might be stored on some server forever, or exposed for the world to see if our accounts are ever compromised. Call me paranoid, but I wanted something a little more secure. That's where smokescrn comes in." />
-	<meta property="og:image" content="<?php echo SITE_URL; ?>/assets/images/ssshh_fb.png"/>
-	<meta property="og:image:secure_url" content="<?php echo SITE_URL; ?>/assets/images/ssshh_fb.png"/>
 </head>
 
 <body class="<?php if($homepage){echo 'home';}?>">
