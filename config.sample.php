@@ -12,18 +12,12 @@ define("EMAIL_BODY_SENT", "A secret message has been sent to you.");
 define("EMAIL_BODY_VIEWED", "The secret message you sent has been viewed.");
 define("EMAIL_FROM_ADDRESS", "me@secretwebsite.com");
 
-// Logging Settings
-define("LOGGING_BASE_DIR", __DIR__."/../logs"); // Writable directory
-
 // SendGrid API Settings
 define("SENDGRID_API_KEY", "INSERT YOUR API");
 
 // Orchestrate.io API Settings
 define("ORCHESTRATE_API_KEY", "INSERT YOUR API");
 define("ORCHESTRATE_COLLECTION", "secrets");
-
-// Google Analytics API Settings
-//define("GOOGLE_ANALYTICS_KEY", "INSERT YOUR KEY");
 
 // User Notifications
 define("VALIDATION_POST", "Form data not received as a POST request.");

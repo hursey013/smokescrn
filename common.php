@@ -14,9 +14,6 @@ $homepage = (strpos($_SERVER['SCRIPT_NAME'], 'index.php') !== false);
 // Determine if a message is being accessed from link
 $referral = (isset($_GET["id"]) && (!empty($_GET["id"])));
 
-// Configure logging
-$logger = new Katzgrau\KLogger\Logger(LOGGING_BASE_DIR, Psr\Log\LogLevel::DEBUG);
-
 // Configure data store
 $application = new andrefelipe\Orchestrate\Application(ORCHESTRATE_API_KEY);
 $collection = $application->collection(ORCHESTRATE_COLLECTION);

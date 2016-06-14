@@ -81,8 +81,7 @@ if (!$errors) {
 	// Decrypt data, reference: https://github.com/defuse/php-encryption/
 	try {
 		$data_decrypted = Crypto::decryptWithPassword($data_encrypted, $password);
-	} catch (Ex\WrongKeyOrModifiedCiphertextException $ex) { // VERY IMPORTANT
-		// Log event
+	} catch (Ex\WrongKeyOrModifiedCiphertextException $ex) {
 		$item->event('log')->post(['action' => 'failed']);
 		response(DECRYPTION_PASSWORD_WRONG, true);
 	} catch (Ex\EnvironmentIsBrokenException $ex) {
@@ -90,13 +89,9 @@ if (!$errors) {
 	}
 	
 	// Delete message
-	$item->delete();	
-	
-	// Log event
 	if ($item->delete()) {
 		$item->event('log')->post(['action' => 'deleted']);
 	} else {
-		$logger->error($item->getStatus());
 		response($item->getStatus(), true);
 	}	
 	
@@ -114,14 +109,8 @@ if (!$errors) {
 			->setSubject(EMAIL_SUBJECT_VIEWED)
 			->setHtml($email_content);
 
-		try {
-			$sendgrid->send($sendemail);
-		} catch(\SendGrid\Exception $e) {
-			foreach($e->getErrors() as $er) {
-				$logger->error($er);
-			}
-		}		
-		
+		$sendgrid->send($sendemail);
+
 	}	
 		
 	// Provide response
@@ -129,6 +118,5 @@ if (!$errors) {
 
 } else {
 	// Unknown error
-	$logger->error(LOG_UNKNOWN_ERROR);
-	die();
+	response(INTERNAL_ERROR, true);
 }

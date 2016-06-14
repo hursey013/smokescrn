@@ -123,7 +123,6 @@ if (!$errors) {
 		$item->event('log')->post(['action' => 'created']);
 		$id = $item->getKey();
 	} else {
-		$logger->error($item->getStatus());
 		response($item->getStatus(), true);
 	}
 	
@@ -150,7 +149,6 @@ if (!$errors) {
 			response($id, false);
 		} catch(\SendGrid\Exception $e) {
 			foreach($e->getErrors() as $er) {
-				$logger->error($er);
 				response($er, true);
 			}
 		}
@@ -162,6 +160,5 @@ if (!$errors) {
 
 } else {
 	// Unknown error
-	$logger->error(LOG_UNKNOWN_ERROR);
-	die();
+	response(INTERNAL_ERROR, true);
 }

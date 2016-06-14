@@ -41,11 +41,12 @@ $(function() {
 	// Connect to encrypt.php and return response
 	$('#form_encrypt').validator().on('submit', function(e) {
 		
-		// Initiate Ladda loading animation
-		var l = $("button", this).ladda();
-		l.ladda('start');
-		
 		if (!e.isDefaultPrevented()) {
+			
+			// Initiate Ladda loading animation
+			var l = $("button", this).ladda();
+			l.ladda('start');
+			
 			var formData = $(this).serialize();
 			$.ajax({
 				type: "POST",
@@ -65,8 +66,7 @@ $(function() {
 					$("#results").show().removeClass().empty().addClass("alert alert-danger fade in text-center").html('<strong>Hold on there...</strong> ' + vars.INTERNAL_ERROR);
 				},
 				complete: function() {
-					var l = $("#form_encrypt button").ladda();
-					l.ladda('stop');
+					$.ladda( 'stopAll' );
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			});
@@ -76,12 +76,13 @@ $(function() {
 
 	// Connect to decrypt.php and return response
 	$('#form_decrypt').validator().on('submit', function(e) {
-			
-		// Initiate Ladda loading animation
-		var l = $("button", this).ladda();
-		l.ladda('start');			
 		
 		if (!e.isDefaultPrevented()) {
+			
+			// Initiate Ladda loading animation
+			var l = $("button", this).ladda();
+			l.ladda('start');			
+			
 			var formData = $(this).serialize();
 			$.ajax({
 				type: "POST",
@@ -101,8 +102,7 @@ $(function() {
 					$("#results").show().removeClass().empty().addClass("alert alert-danger fade in text-center").html('<strong>Hold on there...</strong> ' + vars.INTERNAL_ERROR);
 				},
 				complete: function() {
-					var l = $("#form_decrypt button").ladda();
-					l.ladda('stop');
+					$.ladda( 'stopAll' );
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			});
